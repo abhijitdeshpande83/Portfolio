@@ -1,0 +1,146 @@
+:root{
+    --bg-dark: #08080a;
+    --glass: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --accent: #6366f1; /* Indigo accent */
+    --accent-glow: rgba(99, 102, 241, 0.3);
+    --text-main: #f8fafc;
+    --text-dim: #94a3b8;
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:'Inter',-apple-system,sans-serif;
+    background:var(--bg-dark);
+    height:100vh;
+    color:var(--text-main);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+.shell{
+    width:95vw;
+    height:90vh;
+    max-width:1200px;
+    display:flex;
+    background:var(--glass);
+    backdrop-filter:blur(25px);
+    -webkit-backdrop-filter:blur(25px);
+    border:1px solid var(--glass-border);
+    border-radius:28px;
+    box-shadow:0 40px 80px -20px rgba(0,0,0,.6);
+}
+
+/* Sidebar */
+
+aside{
+    width:240px;
+    background:rgba(0,0,0,.6);
+    border-right:1px solid var(--glass-border);
+    padding:20px 30px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+/* Main layout */
+
+main{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+}
+
+/* Header */
+
+.header{
+    padding:20px 30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid var(--glass-border);
+}
+
+/* Chat Area */
+
+#chatbox{
+    flex:1;
+    padding:40px;
+    overflow-y:auto;
+    scroll-behavior:smooth;
+}
+
+/* Messages */
+
+.usr{
+    margin-left:auto;
+    background:var(--accent);
+    padding:14px 20px;
+    border-radius:18px 18px 4px 18px;
+    font-weight:500;
+    max-width:70%;
+    margin-bottom:14px;
+}
+
+.bot{
+    background:rgba(255,255,255,0.03);
+    border:1px solid var(--glass-border);
+    padding:20px;
+    border-radius:4px 18px 18px 18px;
+    max-width:70%;
+    margin-bottom:14px;
+}
+
+/* Message input row */
+
+.msg-bubble{
+    display:flex;
+    gap:10px;
+    padding:20px;
+    border-top:1px solid var(--glass-border);
+}
+
+.msg-bubble input{
+    flex:1;
+    padding:12px 14px;
+    border-radius:10px;
+    border:1px solid var(--glass-border);
+    background:rgba(255,255,255,0.05);
+    color:white;
+    outline:none;
+}
+
+/* Button */
+
+.btn-btn-img{
+    background:var(--accent);
+    border:none;
+    color:white;
+    padding:0 24px;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.2s;
+}
+
+.btn-btn-img:hover{
+    opacity:.85;
+}
+
+/* Icons */
+
+.usr-img,
+.bot-img{
+    width:30px;
+    height:30px;
+    margin-right:6px;
+    vertical-align:middle;
+}
+

@@ -118,9 +118,15 @@ def intent_classify(request):
 
     return render(request, "supportiq.html")
 
+# Rasa project
 def rasa(request):
 
     return render(request, "rasa_ui.html")
+
+# Taskpilot project
+def taskpilot(request):
+
+    return render(request, "taskpilot.html")
 
 @csrf_exempt
 def booking_confirmation(request):

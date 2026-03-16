@@ -128,6 +128,18 @@ def taskpilot(request):
 
     return render(request, "taskpilot.html")
 
+def lambda_proxy(request):
+
+    if request.method=="POST":
+        data=json.loads(request.body)
+
+        res = requests.post(
+            "https://xu3j3bme1e.execute-api.us-east-1.amazonaws.com/prod/",
+            json=data
+        )
+
+        return JsonResponse(res.json(), safe=False)
+
 @csrf_exempt
 def booking_confirmation(request):
     if request.method=="POST":

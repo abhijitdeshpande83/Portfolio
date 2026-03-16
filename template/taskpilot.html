@@ -37,6 +37,7 @@
         <div id="chatbox"></div>
 
         <div class="msg-bubble">
+            {% csrf_token %}
             <input id="msg" type="text" placeholder="Ask me anything">
             <button class="btn-btn-img" onclick="sendMessage()">Send</button>
         </div>
@@ -48,13 +49,17 @@
 
 <script>
 
+function getCSRFToken() {
+    return document.querySelector('[name=csrfmiddlewaretoken]').value;
+}
+
 async function sendMessage(){
 
     const chat = document.getElementById("chatbox")
     const msgInput = document.getElementById("msg")
     const message = msgInput.value.trim()
 
-    if(message==="") return
+    if(!message) return
 
     chat.innerHTML += `
         <div class="usr">
@@ -63,13 +68,34 @@ async function sendMessage(){
     `
 
     chat.scrollTop = chat.scrollHeight
-
+    console.log(`before Lambda: ${message}`)
+    // Invoke Lambda 
+    try {const res = await fetch("/projects/agent/", {
+        method: "POST",
+        mode: "cors",
+        headers: {
+            "Content-Type":"application/json",
+            "X-CSRFToken": getCSRFToken()
+        },
+        body: JSON.stringify({usr_input:message})
+        });
+    
+    console.log(res.ok)
+    const data = await res.json();
+    console.log(data);
     chat.innerHTML += `
         <div class="bot">
-            <img class="bot-img" src="/media/project/bot.png"> Querying info please wait...
-        </div>
-    `
-
+            <img class="bot-img" src="/media/project/bot.png"> ${data}
+        </div>`
+    }
+    catch(err){
+        console.log("Lambda Error: ",err);
+        chat.innerHTML += `
+        <div class="bot">
+            <img class="bot-img" src="/media/project/bot.png"> Error contacting server...
+        </div>`
+    }
+             
     msgInput.value=""
 
     chat.scrollTop = chat.scrollHeight

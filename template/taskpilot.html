@@ -80,20 +80,28 @@ async function sendMessage(){
         body: JSON.stringify({usr_input:message})
         });
     
+    if (res.status===429){
+        chat.innerHTML += `
+        <div class="bot">
+            <img class="bot-img" src="/media/project/bot.png"> 
+            ⚠️ Too many requests. Please wait a moment and try again.
+        </div>`;
+        return;
+        }
+
     console.log(res.ok)
     const data = await res.json();
     console.log(data);
     chat.innerHTML += `
         <div class="bot">
             <img class="bot-img" src="/media/project/bot.png"> ${data}
-        </div>`
+        </div>`;
     }
     catch(err){
-        console.log("Lambda Error: ",err);
         chat.innerHTML += `
         <div class="bot">
-            <img class="bot-img" src="/media/project/bot.png"> Error contacting server...
-        </div>`
+            <img class="bot-img" src="/media/project/bot.png"> ${err.message}
+        </div>`;
     }
              
     msgInput.value=""

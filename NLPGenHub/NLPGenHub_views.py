@@ -128,6 +128,10 @@ def taskpilot(request):
 
     return render(request, "taskpilot.html")
 
+def aura(request):
+
+    return render(request, "aura.html")
+
 def lambda_proxy(request):
 
     if request.method=="POST":

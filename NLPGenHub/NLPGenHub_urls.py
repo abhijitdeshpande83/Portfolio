@@ -1,5 +1,6 @@
 from django.urls import path
-from .NLPGenHub_views import rag_intelliqa, intent_classify, rasa, booking_confirmation, taskpilot, lambda_proxy
+from .NLPGenHub_views import rag_intelliqa, intent_classify, rasa, booking_confirmation, \
+                                        taskpilot, lambda_proxy, aura
 
 urlpatterns = [
     path('IntelliQA/', rag_intelliqa, name='rag_intelliqa'),
@@ -7,5 +8,6 @@ urlpatterns = [
     path('rasa_cinemora/', rasa, name='rasa-chatbot'),
     path('booking_confirmation/',booking_confirmation, name='booking_confirmation'),
     path('taskpilot/',taskpilot, name='taskpilot'),
-    path('agent/',lambda_proxy,name='agent')
+    path('agent/',lambda_proxy,name='agent'),   
+    path('aura/',aura, name='aura')
 ]

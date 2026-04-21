@@ -129,8 +129,21 @@ def taskpilot(request):
     return render(request, "taskpilot.html")
 
 def aura(request):
-
+    
     return render(request, "aura.html")
+
+@csrf_exempt
+def aura_agent(request):
+
+    if request.method=="POST":
+        data=json.loads(request.body)
+        
+        response = requests.post(
+            "https://5cnkh8o84j.execute-api.us-east-1.amazonaws.com/prod/",
+            json=data
+        ) 
+
+        return JsonResponse(response.json(), safe=False)
 
 def lambda_proxy(request):
 

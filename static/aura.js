@@ -3,7 +3,7 @@ const userInput = document.getElementById("user-input")
 
 async function sendMessage() {
     
-    updateSession("72979e2")
+    updateSession("729792")
 
     message = userInput.value.trim()
     if (!message) return
@@ -15,13 +15,38 @@ async function sendMessage() {
     </div>
     `
 
+    try {const response = await fetch("/projects/aura_agent/", {
+        method: "POST",
+        // mode: "cors",
+        headers: {
+            "Content-Type":"application/json",
+            // "X-CSRFToken": getCSRFToken()
+        },
+        body: JSON.stringify({user_input:message})
+        });
+    
+    const data = await response.json();
+    console.log(data.message)
+
+
     messageBox.innerHTML +=  `
     <div class="bot">
         <img src="/media/project/assistant.png" class="bot-img" alt="">
-        ${message}
+        ${data.message}
     </div>
     `
-    setValue("current-flow", 'active-flow')
+    setValue("current-flow", data.active_flow)
+    }
+
+    catch(err){
+          messageBox.innerHTML +=  `
+    <div class="bot">
+        <img src="/media/project/assistant.png" class="bot-img" alt="">
+        ${err.message}
+    </div>
+    `
+    }
+
     userInput.value = ""
 }
 

@@ -123,10 +123,10 @@ def rasa(request):
 
     return render(request, "rasa_ui.html")
 
-# Taskpilot project
-def taskpilot(request):
+# ATLAS project
+def atlas(request):
 
-    return render(request, "taskpilot.html")
+    return render(request, "atlas.html")
 
 def aura(request):
     

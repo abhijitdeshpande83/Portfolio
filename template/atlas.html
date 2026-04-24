@@ -70,7 +70,7 @@ async function sendMessage(){
     chat.scrollTop = chat.scrollHeight
     console.log(`before Lambda: ${message}`)
     // Invoke Lambda 
-    try {const res = await fetch("/projects/agent/", {
+    try {const res = await fetch("/projects/atlas_agent/", {
         method: "POST",
         mode: "cors",
         headers: {

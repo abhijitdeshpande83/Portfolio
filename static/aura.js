@@ -14,23 +14,6 @@ async function sendMessage() {
     </div>
     `
     messageBox.scrollTop = messageBox.scrollHeight;
-    
-    try {const response = await fetch("/projects/aura_agent/", {
-        method: "POST",
-        // mode: "cors",
-        headers: {
-            "Content-Type":"application/json",
-            // "X-CSRFToken": getCSRFToken()
-        },
-        body: JSON.stringify({
-                user_input: message, 
-                session_id: sessionId 
-            })
-        });
-    
-    const data = await response.json();
-    console.log(data.message)
-    console.log(data)
 
     try {const response = await fetch("/projects/aura_agent/", {
         method: "POST",
@@ -69,7 +52,7 @@ async function sendMessage() {
     }
         
     messageBox.scrollTop = messageBox.scrollHeight;
-    userInput.value = ""
+    userInput.value = "" 
 }
 
 function updateInfo(value) {

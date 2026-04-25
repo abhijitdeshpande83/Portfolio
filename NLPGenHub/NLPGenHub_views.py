@@ -22,7 +22,6 @@ def rag_intelliqa(request):
     if not request.session.session_key:
         request.session.create()
     session_id = request.session.session_key 
-    print(f"Session_id:", session_id)
 
     if request.method=='POST':
         form = UploadFileForm(request.POST, request.FILES)          #Instantiate the Django form 
@@ -121,6 +120,7 @@ def intent_classify(request):
 # Rasa project
 def rasa(request):
 
+
     return render(request, "rasa_ui.html")
 
 # ATLAS project
@@ -129,8 +129,12 @@ def atlas(request):
     return render(request, "atlas.html")
 
 def aura(request):
-    
-    return render(request, "aura.html")
+
+    if not request.session.session_key:
+        request.session.create()
+    session_id=request.session.session_key[:5]
+
+    return render(request, "aura.html",{"session":session_id})
 
 @csrf_exempt
 def aura_agent(request):

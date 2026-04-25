@@ -37,10 +37,11 @@
                     <p id="current-flow">Listening
                         <span class="flow-animation">......</span>
                     </p>
+                    <p class="extracted-info"></p>
                 </div>
                 <div id="customer-profile">
                     <p>Customer Profile</p>
-                    <p>Session ID: <span class="session-id"></span></p>
+                    <p>#USR-{{ session }}</p>
                     <p id="loyalty-score"></p>
                     <p id="customer-category"></p>
                 </div>
@@ -49,7 +50,7 @@
         <main class="chat-box">
             <div class="chat-header">
                 <h2>Agentic User Resolution Assistant (AURA)</h2>
-                <div class="session">session_id# <span class="session-id"></span></div>
+                <div class="session">Session #{{ session }}</div>
             </div>
             <div class="message-container">
                 <div class="bot">

@@ -3,8 +3,6 @@ const userInput = document.getElementById("user-input")
 
 async function sendMessage() {
     
-    updateSession("729792")
-
     message = userInput.value.trim()
     if (!message) return
 
@@ -27,7 +25,7 @@ async function sendMessage() {
     
     const data = await response.json();
     console.log(data.message)
-
+    console.log(data)
 
     messageBox.innerHTML +=  `
     <div class="bot">
@@ -36,8 +34,12 @@ async function sendMessage() {
     </div>
     `
     setValue("current-flow", data.active_flow)
-    }
 
+    if (data.active_flow ==='complaint_flow') {
+        updateInfo(data.extracted_info)
+    }
+    }
+    
     catch(err){
           messageBox.innerHTML +=  `
     <div class="bot">
@@ -50,9 +52,12 @@ async function sendMessage() {
     userInput.value = ""
 }
 
-function updateSession(value) {
-    document.querySelectorAll(".session-id").forEach(session=>
-    {session.textContent=value}
+function updateInfo(value) {
+
+    const formatted= Object.entries(value)
+        .map(([key,val])=> `<strong>${key}</strong>: ${val}`).join(`<br>`);
+    document.querySelectorAll(".extracted-info").forEach(info=>
+    {info.innerHTML=formatted;}
     )
 }
 

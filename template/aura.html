@@ -16,7 +16,8 @@
     <link rel="apple-touch-icon" href="{% static 'favicon_io/apple-touch-icon.png' %}">
     <link rel="icon" href="{% static 'favicon_io/favicon.ico' %}">
     <link rel="manifest" href="{% static 'favicon_io/site.webmanifest' %}">    
-    <link rel="stylesheet" href="{% static '/css/aura.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/aura.css' %}">
 </head>
 <body>
     <div class="app-container">
@@ -37,10 +38,11 @@
                     <p id="current-flow">Listening
                         <span class="flow-animation">......</span>
                     </p>
+                    <p class="extracted-info"></p>
                 </div>
                 <div id="customer-profile">
                     <p>Customer Profile</p>
-                    <p>Session ID: <span class="session-id"></span></p>
+                    <p>#USR-<span id="session-id">{{ session }}</p>
                     <p id="loyalty-score"></p>
                     <p id="customer-category"></p>
                 </div>
@@ -49,12 +51,12 @@
         <main class="chat-box">
             <div class="chat-header">
                 <h2>Agentic User Resolution Assistant (AURA)</h2>
-                <div class="session">session_id# <span class="session-id"></span></div>
+                <div class="session">Session # <span id="session-id">{{ session }}</span></div>
             </div>
             <div class="message-container">
                 <div class="bot">
                     <img src="/media/project/assistant.png" class="bot-img" alt="">
-                    Hello! How can I help you today?
+                        Hello! How can I help you today?
                 </div>
             </div>
 

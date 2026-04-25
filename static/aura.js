@@ -3,9 +3,8 @@ const userInput = document.getElementById("user-input")
 
 async function sendMessage() {
     
-    updateSession("729792")
-
-    message = userInput.value.trim()
+    const message = userInput.value.trim()
+    const sessionId = document.getElementById("session-id").innerText;
     if (!message) return
 
     messageBox.innerHTML +=  `
@@ -14,6 +13,24 @@ async function sendMessage() {
         ${message}
     </div>
     `
+    messageBox.scrollTop = messageBox.scrollHeight;
+    
+    try {const response = await fetch("/projects/aura_agent/", {
+        method: "POST",
+        // mode: "cors",
+        headers: {
+            "Content-Type":"application/json",
+            // "X-CSRFToken": getCSRFToken()
+        },
+        body: JSON.stringify({
+                user_input: message, 
+                session_id: sessionId 
+            })
+        });
+    
+    const data = await response.json();
+    console.log(data.message)
+    console.log(data)
 
     try {const response = await fetch("/projects/aura_agent/", {
         method: "POST",
@@ -36,6 +53,10 @@ async function sendMessage() {
     </div>
     `
     setValue("current-flow", data.active_flow)
+
+    if (data.extracted_info) {
+        updateInfo(data.extracted_info)
+    }
     }
 
     catch(err){
@@ -46,13 +67,17 @@ async function sendMessage() {
     </div>
     `
     }
-
+        
+    messageBox.scrollTop = messageBox.scrollHeight;
     userInput.value = ""
 }
 
-function updateSession(value) {
-    document.querySelectorAll(".session-id").forEach(session=>
-    {session.textContent=value}
+function updateInfo(value) {
+
+    const formatted= Object.entries(value)
+        .map(([key,val])=> `<strong>${key}</strong>: ${val}`).join(`<br>`);
+    document.querySelectorAll(".extracted-info").forEach(info=>
+    {info.innerHTML=formatted;}
     )
 }
 

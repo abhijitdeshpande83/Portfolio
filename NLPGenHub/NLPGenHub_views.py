@@ -22,7 +22,6 @@ def rag_intelliqa(request):
     if not request.session.session_key:
         request.session.create()
     session_id = request.session.session_key 
-    print(f"Session_id:", session_id)
 
     if request.method=='POST':
         form = UploadFileForm(request.POST, request.FILES)          #Instantiate the Django form 
@@ -129,8 +128,30 @@ def atlas(request):
     return render(request, "atlas.html")
 
 def aura(request):
-    
-    return render(request, "aura.html")
+
+    request.session.flush()
+    request.session.create()
+    session_id=request.session.session_key[:5]
+
+    return render(request, "aura.html",{"session":session_id})
+
+@csrf_exempt
+def aura_agent(request, session_id):
+
+    if request.method=="POST":
+        url = "https://5cnkh8o84j.execute-api.us-east-1.amazonaws.com/prod/"
+        data=json.loads(request.body)
+        payload = {
+            "user_input": data,
+            "session_id": session_id
+        }
+        
+        response = requests.post(
+            url,
+            json=payload
+        ) 
+
+        return JsonResponse(response.json(), safe=False)
 
 @csrf_exempt
 def aura_agent(request):

@@ -130,8 +130,8 @@ def atlas(request):
 
 def aura(request):
 
-    if not request.session.session_key:
-        request.session.create()
+    request.session.flush()
+    request.session.create()
     session_id=request.session.session_key[:5]
 
     return render(request, "aura.html",{"session":session_id})

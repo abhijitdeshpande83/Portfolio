@@ -35,7 +35,7 @@ async function sendMessage() {
     `
     setValue("current-flow", data.active_flow)
 
-    if (data.active_flow ==='complaint_flow') {
+    if (data.extracted_info) {
         updateInfo(data.extracted_info)
     }
     }

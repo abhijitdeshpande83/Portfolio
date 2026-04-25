@@ -32,6 +32,20 @@ async function sendMessage() {
     console.log(data.message)
     console.log(data)
 
+    try {const response = await fetch("/projects/aura_agent/", {
+        method: "POST",
+        // mode: "cors",
+        headers: {
+            "Content-Type":"application/json",
+            // "X-CSRFToken": getCSRFToken()
+        },
+        body: JSON.stringify({user_input:message})
+        });
+    
+    const data = await response.json();
+    console.log(data.message)
+
+
     messageBox.innerHTML +=  `
     <div class="bot">
         <img src="/media/project/assistant.png" class="bot-img" alt="">

@@ -3,7 +3,8 @@ const userInput = document.getElementById("user-input")
 
 async function sendMessage() {
     
-    message = userInput.value.trim()
+    const message = userInput.value.trim()
+    const sessionId = document.getElementById("session-id").innerText;
     if (!message) return
 
     messageBox.innerHTML +=  `
@@ -12,7 +13,8 @@ async function sendMessage() {
         ${message}
     </div>
     `
-
+    messageBox.scrollTop = messageBox.scrollHeight;
+    
     try {const response = await fetch("/projects/aura_agent/", {
         method: "POST",
         // mode: "cors",
@@ -20,7 +22,10 @@ async function sendMessage() {
             "Content-Type":"application/json",
             // "X-CSRFToken": getCSRFToken()
         },
-        body: JSON.stringify({user_input:message})
+        body: JSON.stringify({
+                user_input: message, 
+                session_id: sessionId 
+            })
         });
     
     const data = await response.json();
@@ -39,7 +44,7 @@ async function sendMessage() {
         updateInfo(data.extracted_info)
     }
     }
-    
+
     catch(err){
           messageBox.innerHTML +=  `
     <div class="bot">
@@ -48,7 +53,8 @@ async function sendMessage() {
     </div>
     `
     }
-
+        
+    messageBox.scrollTop = messageBox.scrollHeight;
     userInput.value = ""
 }
 

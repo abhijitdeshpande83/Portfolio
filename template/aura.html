@@ -42,7 +42,7 @@
                 </div>
                 <div id="customer-profile">
                     <p>Customer Profile</p>
-                    <p>#USR-{{ session }}</p>
+                    <p>#USR-<span id="session-id">{{ session }}</p>
                     <p id="loyalty-score"></p>
                     <p id="customer-category"></p>
                 </div>
@@ -51,7 +51,7 @@
         <main class="chat-box">
             <div class="chat-header">
                 <h2>Agentic User Resolution Assistant (AURA)</h2>
-                <div class="session">Session #{{ session }}</div>
+                <div class="session">Session # <span id="session-id">{{ session }}</span></div>
             </div>
             <div class="message-container">
                 <div class="bot">

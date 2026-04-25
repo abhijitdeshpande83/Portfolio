@@ -120,7 +120,6 @@ def intent_classify(request):
 # Rasa project
 def rasa(request):
 
-
     return render(request, "rasa_ui.html")
 
 # ATLAS project
@@ -137,14 +136,19 @@ def aura(request):
     return render(request, "aura.html",{"session":session_id})
 
 @csrf_exempt
-def aura_agent(request):
+def aura_agent(request, session_id):
 
     if request.method=="POST":
+        url = "https://5cnkh8o84j.execute-api.us-east-1.amazonaws.com/prod/"
         data=json.loads(request.body)
+        payload = {
+            "user_input": data,
+            "session_id": session_id
+        }
         
         response = requests.post(
-            "https://5cnkh8o84j.execute-api.us-east-1.amazonaws.com/prod/",
-            json=data
+            url,
+            json=payload
         ) 
 
         return JsonResponse(response.json(), safe=False)

@@ -87,7 +87,10 @@ def intent_classify(request):
         try:
             response = requests.post(INTENT_API_URL,json=payload,headers=headers)
             response_data = response.json()
-            domain = response_data['label']
+            if 'body' in response_data:
+                response_data = json.loads(response_data['body'])
+
+            domain = response_data.get('label')
             input_data = {"input": f"[Domain {domain}] User: {prompt}"}
             print(input_data)
             
@@ -142,26 +145,13 @@ def aura_agent(request, session_id):
         url = "https://5cnkh8o84j.execute-api.us-east-1.amazonaws.com/prod/"
         data=json.loads(request.body)
         payload = {
-            "user_input": data,
+            "user_input": data.get("user_input"),
             "session_id": session_id
         }
-        
+        print(session_id)
         response = requests.post(
             url,
             json=payload
-        ) 
-
-        return JsonResponse(response.json(), safe=False)
-
-@csrf_exempt
-def aura_agent(request):
-
-    if request.method=="POST":
-        data=json.loads(request.body)
-        
-        response = requests.post(
-            "https://5cnkh8o84j.execute-api.us-east-1.amazonaws.com/prod/",
-            json=data
         ) 
 
         return JsonResponse(response.json(), safe=False)

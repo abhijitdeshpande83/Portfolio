@@ -88,7 +88,10 @@ def intent_classify(request):
         try:
             response = requests.post(INTENT_API_URL,json=payload,headers=headers)
             response_data = response.json()
-            domain = response_data['label']
+            if 'body' in response_data:
+                response_data = json.loads(response_data['body'])
+
+            domain = response_data.get('label')[0] if response_data.get('label') else "unknown"
             input_data = {"input": f"[Domain {domain}] User: {prompt}"}
             print(input_data)
             

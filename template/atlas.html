@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATLAS</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon_io/favicon-32x32.png' %}">
+    <link rel="stylesheet" href="{% static '/css/atlas.css' %}">
+</head>
+
+<body>
+
+<div class="shell">
+    <aside>
+        <div class="brand-wrapper">
+            <i class="fa-solid fa-earth-americas atlas-logo rotating"></i>
+            <h1 class="sidebar-logo-text">ATLAS</h1>
+        </div>
+
+        <div class="status-indicator">
+            <span class="dot"></span> Web Engine Active
+        </div>
+    </aside>
+
+    <main>
+        <div class="header">
+            <h2 class="sub-header-text"><i class="fa-solid fa-microchip"></i> Agentic Tool-Enabled Web Assistant</h2>
+        </div>
+
+        <div id="chatbox">
+            <div class="bot">
+                <i class="fa-solid fa-robot bot-img" style="color: #22d3ee; font-size: 24px;"></i>
+                <div class="message-content">
+                    Hello, I am ATLAS. How can I help you explore the web today?
+                </div>
+            </div>
+        </div>
+
+        <div class="msg-bubble">
+            {% csrf_token %}
+            <div class="input-container">
+                <input id="msg" type="text" placeholder="Ask me anything..." autocomplete="off">
+                <button class="btn-send" onclick="sendMessage()">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script>
+function getCSRFToken() {
+    return document.querySelector('[name=csrfmiddlewaretoken]').value;
+}
+
+// Enter key support
+document.getElementById("msg").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") sendMessage();
+});
+
+async function sendMessage(){
+    const chat = document.getElementById("chatbox");
+    const msgInput = document.getElementById("msg");
+    const message = msgInput.value.trim();
+
+    if(!message) return;
+
+    // User Message
+    chat.innerHTML += `
+        <div class="usr">
+            <div class="message-content">${message}</div>
+            <i class="fa-solid fa-user-circle usr-img" style="color: #6366f1; font-size: 24px;"></i>
+        </div>
+    `;
+
+    chat.scrollTop = chat.scrollHeight;
+    msgInput.value = "";
+
+    try {
+        const res = await fetch("/projects/atlas_agent/", {
+            method: "POST",
+            headers: {
+                "Content-Type":"application/json",
+                "X-CSRFToken": getCSRFToken()
+            },
+            body: JSON.stringify({usr_input: message})
+        });
+    
+        const data = await res.json();
+        const botResponse = (typeof data === 'object') ? (data.response || JSON.stringify(data)) : data;
+
+        chat.innerHTML += `
+            <div class="bot">
+                <i class="fa-solid fa-robot bot-img" style="color: #22d3ee; font-size: 24px;"></i>
+                <div class="message-content">${botResponse}</div>
+            </div>
+        `;
+    } catch(err) {
+        chat.innerHTML += `<div class="bot"><div class="message-content">Error: ${err.message}</div></div>`;
+    }
+    chat.scrollTop = chat.scrollHeight;
+}
+</script>
+
+</body>
+</html>

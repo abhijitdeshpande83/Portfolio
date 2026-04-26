@@ -22,7 +22,6 @@ def rag_intelliqa(request):
     if not request.session.session_key:
         request.session.create()
     session_id = request.session.session_key 
-    print(f"Session_id:", session_id)
 
     if request.method=='POST':
         form = UploadFileForm(request.POST, request.FILES)          #Instantiate the Django form 
@@ -121,9 +120,53 @@ def intent_classify(request):
 
     return render(request, "supportiq.html")
 
+# Rasa project
 def rasa(request):
 
     return render(request, "rasa_ui.html")
+
+# ATLAS project
+def atlas(request):
+
+    return render(request, "atlas.html")
+
+def aura(request):
+
+    request.session.flush()
+    request.session.create()
+    session_id=request.session.session_key[:5]
+
+    return render(request, "aura.html",{"session":session_id})
+
+@csrf_exempt
+def aura_agent(request, session_id):
+
+    if request.method=="POST":
+        url = "https://5cnkh8o84j.execute-api.us-east-1.amazonaws.com/prod/"
+        data=json.loads(request.body)
+        payload = {
+            "user_input": data.get("user_input"),
+            "session_id": session_id
+        }
+        print(session_id)
+        response = requests.post(
+            url,
+            json=payload
+        ) 
+
+        return JsonResponse(response.json(), safe=False)
+
+def lambda_proxy(request):
+
+    if request.method=="POST":
+        data=json.loads(request.body)
+
+        res = requests.post(
+            "https://xu3j3bme1e.execute-api.us-east-1.amazonaws.com/prod/",
+            json=data
+        )
+
+        return JsonResponse(res.json(), safe=False)
 
 @csrf_exempt
 def booking_confirmation(request):

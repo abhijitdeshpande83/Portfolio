@@ -50,7 +50,7 @@ def rag_intelliqa(request):
             request.session['file_count'] += 1
     
             raw_text = load_data(file_path)
-            vectorstore_db = vectorstore(persist_directory='media/NLP_data/chroma_db',texts=raw_text)
+            vectorstore_db = vectorstore(persist_directory='media/NLP_data/chroma_db',documents=raw_text)
             return render(request, "intelliqa.html", {'form':form})
         
         elif query:
@@ -90,7 +90,7 @@ def intent_classify(request):
             if 'body' in response_data:
                 response_data = json.loads(response_data['body'])
 
-            domain = response_data.get('label')
+            domain = response_data.get('label')[0] if response_data.get('label') else "unknown"
             input_data = {"input": f"[Domain {domain}] User: {prompt}"}
             print(input_data)
             

@@ -49,7 +49,7 @@ def rag_intelliqa(request):
         
             request.session['file_count'] += 1
     
-            raw_text = load_data(file_path)
+            raw_text = load_data(file_path, session_id)
             vectorstore_db = vectorstore(persist_directory='media/NLP_data/chroma_db',texts=raw_text)
             return render(request, "intelliqa.html", {'form':form})
         
@@ -57,7 +57,7 @@ def rag_intelliqa(request):
             if not os.path.exists('media/NLP_data/chroma_db'):
                 return render(request, 'intelliqa.html', {' answer':"No file uploaded. Please upload a file to proceed.", 'form':form})
             vectorstore_db = vectorstore(persist_directory='media/NLP_data/chroma_db')
-            response = ask_question(query,vectorstore_db)
+            response = ask_question(query,vectorstore_db,session_id)
             return render(request, 'intelliqa.html', {'answer':response,'form':form})
         else:
             return render(request, 'intelliqa.html', {'answer':"Please enter your question",'form':form})

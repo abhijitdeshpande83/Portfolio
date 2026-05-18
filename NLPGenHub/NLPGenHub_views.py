@@ -49,15 +49,20 @@ def rag_intelliqa(request):
         
             request.session['file_count'] += 1
     
+<<<<<<< HEAD
             raw_text = load_data(file_path)
             vectorstore_db = vectorstore(persist_directory='media/NLP_data/chroma_db',documents=raw_text)
+=======
+            raw_text = load_data(file_path, session_id)
+            vectorstore_db = vectorstore(persist_directory='media/NLP_data/chroma_db',texts=raw_text)
+>>>>>>> ce96f88b (Updated `NLPGenHub_views.py` to support `session_id` integration with the `rag_pipeline`. (#40))
             return render(request, "intelliqa.html", {'form':form})
         
         elif query:
             if not os.path.exists('media/NLP_data/chroma_db'):
                 return render(request, 'intelliqa.html', {' answer':"No file uploaded. Please upload a file to proceed.", 'form':form})
             vectorstore_db = vectorstore(persist_directory='media/NLP_data/chroma_db')
-            response = ask_question(query,vectorstore_db)
+            response = ask_question(query,vectorstore_db,session_id)
             return render(request, 'intelliqa.html', {'answer':response,'form':form})
         else:
             return render(request, 'intelliqa.html', {'answer':"Please enter your question",'form':form})

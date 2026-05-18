@@ -1,6 +1,6 @@
 from django.urls import path
 from .NLPGenHub_views import rag_intelliqa, intent_classify, rasa, booking_confirmation, \
-                                        taskpilot, lambda_proxy, aura
+                                        atlas, lambda_proxy, aura, aura_agent
 
 urlpatterns = [
     path('IntelliQA/', rag_intelliqa, name='rag_intelliqa'),

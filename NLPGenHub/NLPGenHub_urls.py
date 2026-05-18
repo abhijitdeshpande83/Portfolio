@@ -10,5 +10,5 @@ urlpatterns = [
     path('atlas/',atlas, name='atlas'),
     path('atlas_agent/',lambda_proxy,name='atlas_agent'),   
     path('aura/',aura, name='aura'),
-    path('aura_agent/',aura_agent,name='aura_agent')
+    path('aura_agent/<str:session_id>/',aura_agent,name='aura_agent')
 ]

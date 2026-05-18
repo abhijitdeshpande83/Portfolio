@@ -37,3 +37,6 @@ dockerfile
 README.md
 docker-compose.yml
 
+# media files and static files
+media/
+staticfiles/

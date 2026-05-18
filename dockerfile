@@ -16,7 +16,7 @@ COPY libs/ libs/
 
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
-RUN pip install ./libs/rag_pipeline-2.0-py3-none-any.whl
+RUN pip install ./libs/rag_pipeline-3.0-py3-none-any.whl
 
 # Copy all project files
 COPY . .

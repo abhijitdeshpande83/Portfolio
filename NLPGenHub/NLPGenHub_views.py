@@ -90,11 +90,8 @@ def intent_classify(request):
             if 'body' in response_data:
                 response_data = json.loads(response_data['body'])
 
-<<<<<<< HEAD
             domain = response_data.get('label')[0] if response_data.get('label') else "unknown"
-=======
-            domain = response_data.get('label')
->>>>>>> 3216be90 (fix(ui): enhance ATLAS UI)
+
             input_data = {"input": f"[Domain {domain}] User: {prompt}"}
             print(input_data)
             
@@ -135,10 +132,6 @@ def atlas(request):
     return render(request, "atlas.html")
 
 def aura(request):
-<<<<<<< HEAD
-    
-    return render(request, "aura.html")
-=======
 
     request.session.flush()
     request.session.create()
@@ -163,7 +156,6 @@ def aura_agent(request, session_id):
         ) 
 
         return JsonResponse(response.json(), safe=False)
->>>>>>> 3216be90 (fix(ui): enhance ATLAS UI)
 
 def lambda_proxy(request):
 

@@ -3,8 +3,14 @@ const userInput = document.getElementById("user-input")
 
 async function sendMessage() {
     
+<<<<<<< HEAD
     const message = userInput.value.trim()
     const sessionId = document.getElementById("session-id").innerText;
+=======
+    updateSession("72979e2")
+
+    message = userInput.value.trim()
+>>>>>>> 57a0f659 (feat(AURA): add UI to AURA project)
     if (!message) return
 
     messageBox.innerHTML +=  `
@@ -13,6 +19,7 @@ async function sendMessage() {
         ${message}
     </div>
     `
+<<<<<<< HEAD
     messageBox.scrollTop = messageBox.scrollHeight;
     
     try {const response = await fetch("/projects/aura_agent/", {
@@ -31,10 +38,13 @@ async function sendMessage() {
     const data = await response.json();
     console.log(data.message)
     console.log(data)
+=======
+>>>>>>> 57a0f659 (feat(AURA): add UI to AURA project)
 
     messageBox.innerHTML +=  `
     <div class="bot">
         <img src="/media/project/assistant.png" class="bot-img" alt="">
+<<<<<<< HEAD
         ${data.message}
     </div>
     `
@@ -64,6 +74,18 @@ function updateInfo(value) {
         .map(([key,val])=> `<strong>${key}</strong>: ${val}`).join(`<br>`);
     document.querySelectorAll(".extracted-info").forEach(info=>
     {info.innerHTML=formatted;}
+=======
+        ${message}
+    </div>
+    `
+    setValue("current-flow", 'active-flow')
+    userInput.value = ""
+}
+
+function updateSession(value) {
+    document.querySelectorAll(".session-id").forEach(session=>
+    {session.textContent=value}
+>>>>>>> 57a0f659 (feat(AURA): add UI to AURA project)
     )
 }
 

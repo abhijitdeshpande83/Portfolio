@@ -33,6 +33,8 @@ dist/
 # Docker files themselves
 dockerfile
 .dockerignore
+docker-clean.sh
+docker-build.sh
 README.md
 docker-compose.yml
 

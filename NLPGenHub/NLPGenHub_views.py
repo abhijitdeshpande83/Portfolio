@@ -45,11 +45,12 @@ def rag_intelliqa(request):
             
             form_data = QueryData.objects.create(query_file=file, file_hash=file_hash)
             form_data.save()
-            file_path = 'media/NLP_data/' + os.path.basename(form_data.query_file.name)
+            file_name = os.path.basename(form_data.query_file.name)
+            file_path = 'media/NLP_data/' + file_name
         
             request.session['file_count'] += 1
     
-            raw_text = load_data(file_path, session_id)
+            raw_text = load_data(file_path, session_id, file_name)
             vectorstore_db = vectorstore(persist_directory='media/NLP_data/chroma_db',texts=raw_text)
             return render(request, "intelliqa.html", {'form':form})
         
@@ -90,21 +91,7 @@ def intent_classify(request):
             if 'body' in response_data:
                 response_data = json.loads(response_data['body'])
 
-<<<<<<< HEAD
             domain = response_data.get('label')[0] if response_data.get('label') else "unknown"
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> 664dcfdb (fix(intent-api): safely handle nested response body and extract domain from label)
-=======
-=======
-            domain = response_data.get('label')
->>>>>>> 3216be90 (fix(ui): enhance ATLAS UI)
->>>>>>> c9a42532 (chore(aura): resolve rebase conflicts)
-=======
->>>>>>> 6455d6de (feat: update NLPViews to add session_id for rag_pipeline)
             input_data = {"input": f"[Domain {domain}] User: {prompt}"}
             print(input_data)
             
@@ -145,8 +132,6 @@ def atlas(request):
     return render(request, "atlas.html")
 
 def aura(request):
-<<<<<<< HEAD
-<<<<<<< HEAD
 
     request.session.flush()
     request.session.create()
@@ -171,40 +156,6 @@ def aura_agent(request, session_id):
         ) 
 
         return JsonResponse(response.json(), safe=False)
-
-def aura(request):
-=======
->>>>>>> 5f52a04d (chore(aura): resolve rebase conflicts)
-=======
->>>>>>> c9a42532 (chore(aura): resolve rebase conflicts)
-    
-    return render(request, "aura.html")
-=======
-
-    request.session.flush()
-    request.session.create()
-    session_id=request.session.session_key[:5]
-
-    return render(request, "aura.html",{"session":session_id})
-
-@csrf_exempt
-def aura_agent(request, session_id):
-
-    if request.method=="POST":
-        url = "https://5cnkh8o84j.execute-api.us-east-1.amazonaws.com/prod/"
-        data=json.loads(request.body)
-        payload = {
-            "user_input": data.get("user_input"),
-            "session_id": session_id
-        }
-        print(session_id)
-        response = requests.post(
-            url,
-            json=payload
-        ) 
-
-        return JsonResponse(response.json(), safe=False)
->>>>>>> 3216be90 (fix(ui): enhance ATLAS UI)
 
 def lambda_proxy(request):
 

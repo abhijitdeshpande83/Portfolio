@@ -16,7 +16,7 @@ async function sendMessage() {
     chatBox.scrollTop = chatBox.scrollHeight;
 
     try {
-        const res = await fetch("https://www.theanalyticmind.com/rasa/webhooks/rest/webhook", {
+        const res = await fetch("https://analyticminds.com/rasa/webhooks/rest/webhook", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ sender: "user1", message: message })

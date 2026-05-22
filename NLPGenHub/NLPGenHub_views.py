@@ -49,7 +49,7 @@ def process_file(request):
     form_data.save()
     file_name = os.path.basename(form_data.query_file.name)
     file_path = 'media/NLP_data/' + file_name
-        
+
     request.session['file_count'] += 1
     
     raw_text = load_data(file_path, session_id, file_name)

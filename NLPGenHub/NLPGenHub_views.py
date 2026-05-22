@@ -51,7 +51,7 @@ def rag_intelliqa(request):
             request.session['file_count'] += 1
     
             raw_text = load_data(file_path, session_id, file_name)
-            vectorstore_db = vectorstore(persist_directory='media/NLP_data/chroma_db',texts=raw_text)
+            vectorstore_db = vectorstore(persist_directory='media/NLP_data/chroma_db',documents=raw_text)
             return render(request, "intelliqa.html", {'form':form})
         
         elif query:

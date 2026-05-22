@@ -45,11 +45,12 @@ def rag_intelliqa(request):
             
             form_data = QueryData.objects.create(query_file=file, file_hash=file_hash)
             form_data.save()
-            file_path = 'media/NLP_data/' + os.path.basename(form_data.query_file.name)
+            file_name = os.path.basename(form_data.query_file.name)
+            file_path = 'media/NLP_data/' + file_name
         
             request.session['file_count'] += 1
     
-            raw_text = load_data(file_path, session_id)
+            raw_text = load_data(file_path, session_id, file_name)
             vectorstore_db = vectorstore(persist_directory='media/NLP_data/chroma_db',texts=raw_text)
             return render(request, "intelliqa.html", {'form':form})
         
@@ -91,7 +92,6 @@ def intent_classify(request):
                 response_data = json.loads(response_data['body'])
 
             domain = response_data.get('label')[0] if response_data.get('label') else "unknown"
-
             input_data = {"input": f"[Domain {domain}] User: {prompt}"}
             print(input_data)
             

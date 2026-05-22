@@ -9,8 +9,8 @@
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-<<<<<<< HEAD
-<<<<<<< HEAD
+
+    <!-- Icons + Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
@@ -25,29 +25,6 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="{% static 'css/aura.css' %}">
-    <link rel="stylesheet" href="{% static '/css/aura.css' %}">
-=======
-=======
->>>>>>> c9a42532 (chore(aura): resolve rebase conflicts)
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon_io/favicon-16x16.png' %}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon_io/favicon-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="192x192" href="{% static 'favicon_io/android-chrome-192x192.png' %}">
-    <link rel="icon" type="image/png" sizes="512x512" href="{% static 'favicon_io/android-chrome-512x512.png' %}">
-    <link rel="apple-touch-icon" href="{% static 'favicon_io/apple-touch-icon.png' %}">
-    <link rel="icon" href="{% static 'favicon_io/favicon.ico' %}">
-    <link rel="manifest" href="{% static 'favicon_io/site.webmanifest' %}">    
-<<<<<<< HEAD
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-=======
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
->>>>>>> 3216be90 (fix(ui): enhance ATLAS UI)
-    <link rel="stylesheet" href="{% static 'css/aura.css' %}">
-=======
-    <link rel="stylesheet" href="{% static '/css/aura.css' %}">
->>>>>>> 57a0f659 (feat(AURA): add UI to AURA project)
->>>>>>> afeb74f4 (chore(aura): resolve rebase conflicts)
 </head>
 
 <body>
@@ -75,150 +52,17 @@
                 <div class="extracted-info"></div>
             </div>
 
-            <div class="information">
-<<<<<<< HEAD
-<<<<<<< HEAD
-                </div>
-                <div id="customer-profile">
-                    <p>Customer Profile</p>
-                    <p>Session ID: <span class="session-id"></span></p>
+            <!-- Customer Profile -->
+            <div id="customer-profile" class="info-card">
+                <label><i class="fas fa-user-shield"></i> Customer Profile</label>
 
-=======
-=======
->>>>>>> c9a42532 (chore(aura): resolve rebase conflicts)
-                <div class="content">
-                    <p>Coversation Mode</p>
-                    <p id="current-flow">Listening
-                        <span class="flow-animation">......</span>
-                    </p>
-<<<<<<< HEAD
-                    <p class="extracted-info"></p>
-                </div>
-                <div id="customer-profile">
-                    <p>Customer Profile</p>
-                    <p>#USR-<span id="session-id">{{ session }}</p>
-=======
-                </div>
-                <div id="customer-profile">
-                    <p>Customer Profile</p>
-                    <p>Session ID: <span class="session-id"></span></p>
->>>>>>> 57a0f659 (feat(AURA): add UI to AURA project)
->>>>>>> afeb74f4 (chore(aura): resolve rebase conflicts)
+                <p class="session-tag">
+                    #USR-<span id="session-id">{{ session }}</span>
+                </p>
+
+                <div class="profile-stats">
                     <p id="loyalty-score"></p>
                     <p id="customer-category"></p>
-<<<<<<< HEAD
-=======
-=======
->>>>>>> c9a42532 (chore(aura): resolve rebase conflicts)
-                <div class="info-card">
-                    <label><i class="fas fa-satellite-dish"></i> Conversation Mode</label>
-                    <p id="current-flow">Listening <span class="flow-animation">...</span></p>
-                    <div class="extracted-info"></div>
-                </div>
-<<<<<<< HEAD
-                <div class="info-card">
-                    <label><i class="fas fa-satellite-dish"></i> Conversation Mode</label>
-                    <p id="current-flow">Listening <span class="flow-animation">...</span></p>
-                    <div class="extracted-info"></div>
-                </div>
-
-=======
->>>>>>> c9a42532 (chore(aura): resolve rebase conflicts)
-
-                <div id="customer-profile" class="info-card">
-                    <label><i class="fas fa-user-shield"></i> Customer Profile</label>
-                    <p class="session-tag">#USR-<span id="session-id">{{ session }}</span></p>
-                    <div class="profile-stats">
-                        <p id="loyalty-score"></p>
-                        <p id="customer-category"></p>
-                    </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> 3216be90 (fix(ui): enhance ATLAS UI)
->>>>>>> c9a42532 (chore(aura): resolve rebase conflicts)
-                </div>
-            </div>
-        </aside>
-
-        <main class="chat-box">
-<<<<<<< HEAD
-<<<<<<< HEAD
-                <div class="session">session_id# <span class="session-id"></span></div>
-
-=======
-=======
->>>>>>> c9a42532 (chore(aura): resolve rebase conflicts)
-            <div class="chat-header">
-                <h2>Agentic User Resolution Assistant (AURA)</h2>
-<<<<<<< HEAD
-                <div class="session">Session # <span id="session-id">{{ session }}</span></div>
-=======
-                <div class="session">session_id# <span class="session-id"></span></div>
->>>>>>> 57a0f659 (feat(AURA): add UI to AURA project)
->>>>>>> afeb74f4 (chore(aura): resolve rebase conflicts)
-            </div>
-            <div class="message-container">
-                <div class="bot">
-                    <img src="/media/project/assistant.png" class="bot-img" alt="">
-<<<<<<< HEAD
-                    Hello! How can I help you today?
-
-            <header class="chat-header">
-                <div class="header-left">
-                    <h2>Agentic User Resolution Assistant</h2>
-                    <span class="aura-version">v2.4.0 (Active)</span>
-                </div>
-                <div class="session-header">Session #{{ session }}</div>
-            </header>
-
-            <div class="message-container" id="message-box">
-                <div class="bot">
-                    <img src="/media/project/assistant.png" class="bot-img" alt="">
-                    <div class="bubble">
-                        Hello! I am AURA. How can I assist you with your resolution today?
-                    </div>
-
-            <header class="chat-header">
-                <div class="header-left">
-                    <h2>Agentic User Resolution Assistant</h2>
-                    <span class="aura-version">v2.4.0 (Active)</span>
-                </div>
-                <div class="session-header">Session #{{ session }}</div>
-            </header>
-
-            <div class="message-container" id="message-box">
-                <div class="bot">
-                    <img src="/media/project/assistant.png" class="bot-img" alt="">
-                    <div class="bubble">
-                        Hello! I am AURA. How can I assist you with your resolution today?
-                    </div>
-=======
-<<<<<<< HEAD
-                        Hello! How can I help you today?
-=======
-                    Hello! How can I help you today?
->>>>>>> 57a0f659 (feat(AURA): add UI to AURA project)
-<<<<<<< HEAD
->>>>>>> afeb74f4 (chore(aura): resolve rebase conflicts)
-=======
-=======
-            <header class="chat-header">
-                <div class="header-left">
-                    <h2>Agentic User Resolution Assistant</h2>
-                    <span class="aura-version">v2.4.0 (Active)</span>
-                </div>
-                <div class="session-header">Session #{{ session }}</div>
-            </header>
-
-            <div class="message-container" id="message-box">
-                <div class="bot">
-                    <img src="/media/project/assistant.png" class="bot-img" alt="">
-                    <div class="bubble">
-                        Hello! I am AURA. How can I assist you with your resolution today?
-                    </div>
->>>>>>> 3216be90 (fix(ui): enhance ATLAS UI)
->>>>>>> c9a42532 (chore(aura): resolve rebase conflicts)
                 </div>
             </div>
 

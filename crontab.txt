@@ -1,4 +1,4 @@
 SHELL=/bin/bash
 PATH=/usr/local/bin:/usr/bin:/bin
 TZ=America/Chicago
-26 7 * * *  root /cleanup.sh >> /var/log/cleanup.log 2>&1
+26 7 * * * /intelliqa-cleanup.sh >> /var/log/intelliqa-cleanup.log 2>&1

@@ -50,26 +50,8 @@ def rag_intelliqa(request):
         
             request.session['file_count'] += 1
     
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
             raw_text = load_data(file_path)
             vectorstore_db = vectorstore(persist_directory='media/NLP_data/chroma_db',documents=raw_text)
-=======
-            raw_text = load_data(file_path, session_id)
-=======
-            raw_text = load_data(file_path, session_id, file_name)
-<<<<<<< HEAD
->>>>>>> 8ec38f5a (Update IntelliQA wheel distribution and fix variable mismatch (#45))
-            vectorstore_db = vectorstore(persist_directory='media/NLP_data/chroma_db',texts=raw_text)
->>>>>>> ce96f88b (Updated `NLPGenHub_views.py` to support `session_id` integration with the `rag_pipeline`. (#40))
-=======
-            vectorstore_db = vectorstore(persist_directory='media/NLP_data/chroma_db',documents=raw_text)
->>>>>>> fa71598f (chore(docker): add build/clean scripts, update ignore rules, refactor build script naming (#46))
-=======
-            raw_text = load_data(file_path, session_id, file_name)
-            vectorstore_db = vectorstore(persist_directory='media/NLP_data/chroma_db',texts=raw_text)
->>>>>>> 14122ac1 (fix(intelliqa): correct variable mismatch and standardize documents parameter)
             return render(request, "intelliqa.html", {'form':form})
         
         elif query:

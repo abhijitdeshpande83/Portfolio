@@ -6,6 +6,7 @@ const fileInput = document.getElementById("file-input");
 const uploadBtn = document.getElementById("uploadBtn");
 const chat = document.getElementById("chat");
 const textInput = document.getElementById("msg");
+const fileList = document.getElementById("file-list");
 
 uploadBtn.addEventListener("click", function() {
     fileInput.click();
@@ -70,7 +71,8 @@ async function sendMessage(){
 async function uploadFile() {
 
     const fileData = new FormData();
-    fileData.append('file', fileInput.files[0]);
+    const file = fileInput.files[0];
+    fileData.append('file', file);
 
     const embedded_data = await fetch("/projects/process_file/", 
         {
@@ -84,8 +86,20 @@ async function uploadFile() {
     const data = await embedded_data.json();
 
     showToast(data.message, data.status);
+    if (data.status === "success") {
+    addFileToDisplay(file);
+    }
     return;
     }
+
+function addFileToDisplay(file) {
+
+    fileList.innerHTML += `
+        <div class="file-item">
+            <i class="fa-solid fa-file-lines"></i>
+            <span class="file-name-text">${file.name}</span>
+        </div>`;
+}
 
 fileInput.addEventListener("change", function() {
     if(fileInput.files.length > 0) {
@@ -93,6 +107,7 @@ fileInput.addEventListener("change", function() {
         fileInput.value = ""; 
     }
 });
+
 
 function showToast(message, type = "success") {
     const toast = document.getElementById("toast");

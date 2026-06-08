@@ -7,6 +7,8 @@
     --text-main: #f8fafc;
     --text-dim: #94a3b8;
     --border: rgba(255, 255, 255, 0.1);
+    --accent: #6366f1;
+    --bot-bg: #1e293b;
 }
 
 * {

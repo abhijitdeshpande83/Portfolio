@@ -7,9 +7,13 @@ const uploadBtn = document.getElementById("uploadBtn");
 const chat = document.getElementById("chat");
 const textInput = document.getElementById("msg");
 <<<<<<< HEAD
+<<<<<<< HEAD
 const fileList = document.getElementById("file-list");
 =======
 >>>>>>> 820e458e (refactor(intelliqa): decouple Django views and migrate IntelliQA to AJAX-based JSON workflow with dynamic chat, file upload handling, session-based history, and improved UX)
+=======
+const fileList = document.getElementById("file-list");
+>>>>>>> 90b2734a (feat(intelliqa): add file list display for uploaded documents)
 
 uploadBtn.addEventListener("click", function() {
     fileInput.click();
@@ -75,11 +79,16 @@ async function uploadFile() {
 
     const fileData = new FormData();
 <<<<<<< HEAD
+<<<<<<< HEAD
     const file = fileInput.files[0];
     fileData.append('file', file);
 =======
     fileData.append('file', fileInput.files[0]);
 >>>>>>> 820e458e (refactor(intelliqa): decouple Django views and migrate IntelliQA to AJAX-based JSON workflow with dynamic chat, file upload handling, session-based history, and improved UX)
+=======
+    const file = fileInput.files[0];
+    fileData.append('file', file);
+>>>>>>> 90b2734a (feat(intelliqa): add file list display for uploaded documents)
 
     const embedded_data = await fetch("/projects/process_file/", 
         {
@@ -94,6 +103,9 @@ async function uploadFile() {
 
     showToast(data.message, data.status);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 90b2734a (feat(intelliqa): add file list display for uploaded documents)
     if (data.status === "success") {
     addFileToDisplay(file);
     }
@@ -109,11 +121,14 @@ function addFileToDisplay(file) {
         </div>`;
 }
 
+<<<<<<< HEAD
 =======
     return;
     }
 
 >>>>>>> 820e458e (refactor(intelliqa): decouple Django views and migrate IntelliQA to AJAX-based JSON workflow with dynamic chat, file upload handling, session-based history, and improved UX)
+=======
+>>>>>>> 90b2734a (feat(intelliqa): add file list display for uploaded documents)
 fileInput.addEventListener("change", function() {
     if(fileInput.files.length > 0) {
         uploadFile();
@@ -122,9 +137,13 @@ fileInput.addEventListener("change", function() {
 });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> 820e458e (refactor(intelliqa): decouple Django views and migrate IntelliQA to AJAX-based JSON workflow with dynamic chat, file upload handling, session-based history, and improved UX)
+=======
+
+>>>>>>> 90b2734a (feat(intelliqa): add file list display for uploaded documents)
 function showToast(message, type = "success") {
     const toast = document.getElementById("toast");
 

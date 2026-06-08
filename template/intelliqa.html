@@ -37,50 +37,29 @@
             </div>
         </header>
 
-        <form action="{% url 'rag_intelliqa' %}" method="post" enctype="multipart/form-data" class="main-chat-form"> 
-            {% csrf_token %}
-            
-            <div class="file-upload-wrapper">
-                <div class="file-input-container">
-                    {{ form.query_file }}   
-                </div>
-                <button type="submit" name="upload_only" class="upload-btn">
-                    <i class="fas fa-file-upload"></i> Upload Document
-                </button>
-            </div>
-            
-            <div class="chat-display-area">
-                {% if question %}
-                <div class="msg-row user-row">
-                    <div class="bubble user-bubble">{{ question }}</div>
-                </div>
-                {% endif %}
+        <div id="chat" class="message-container"></div>
 
-                {% if answer %}
-                <div class="msg-row bot-row">
-                    <div class="bubble bot-bubble">{{ answer }}</div>
-                </div>
-                {% else %}
-                    {% if not question %}
-                    <div class="empty-prompt">
-                        <i class="fas fa-robot" style="font-size: 60px; color: var(--primary-blue); margin-bottom: 20px; opacity: 0.8;"></i>
-                        <h3>How can I help you today?</h3>
-                        <p>Upload a document and ask a specific question to begin analysis.</p>
-                    </div>
-                    {% endif %}
-                {% endif %}
-            </div>
-  
-            <div class="input-section">
-                <textarea name="question" placeholder="Ask your question here..." rows="1"></textarea>
-                <button type="submit" class="icon-send-btn">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="22" y1="2" x2="11" y2="13"></line>
-                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                    </svg>
-                </button>
-            </div>
-        </form>
+        <div class="input-section" id="inputSection">
+            <textarea name="question" id="msg" placeholder="Ask your question here..." rows="1"></textarea>
+            <button type="button" onclick="sendMessage()" class="icon-send-btn" id="sendBtn">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+            </button>
+            {% csrf_token %}
+            <input type="file" id="file-input" style="display:none;">
+            <button type="button" id="uploadBtn" class="icon-upload-btn" title="Attach File">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21.44 11.05l-9.19 9.19a5.5 5.5 0 0 1-7.78-7.78l9.19-9.19a3.5 3.5 0 0 1 4.95 4.95l-9.2 9.19a1.5 1.5 0 0 1-2.12-2.12l8.49-8.48"/>
+                </svg>
+            </button>
+        </div>
     </div>
+
+<div id="toast"></div>
+
+<script src="{% static 'intelliqa.js' %}"></script>
+
 </body>
 </html>

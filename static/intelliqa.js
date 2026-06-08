@@ -6,7 +6,10 @@ const fileInput = document.getElementById("file-input");
 const uploadBtn = document.getElementById("uploadBtn");
 const chat = document.getElementById("chat");
 const textInput = document.getElementById("msg");
+<<<<<<< HEAD
 const fileList = document.getElementById("file-list");
+=======
+>>>>>>> 820e458e (refactor(intelliqa): decouple Django views and migrate IntelliQA to AJAX-based JSON workflow with dynamic chat, file upload handling, session-based history, and improved UX)
 
 uploadBtn.addEventListener("click", function() {
     fileInput.click();
@@ -71,8 +74,12 @@ async function sendMessage(){
 async function uploadFile() {
 
     const fileData = new FormData();
+<<<<<<< HEAD
     const file = fileInput.files[0];
     fileData.append('file', file);
+=======
+    fileData.append('file', fileInput.files[0]);
+>>>>>>> 820e458e (refactor(intelliqa): decouple Django views and migrate IntelliQA to AJAX-based JSON workflow with dynamic chat, file upload handling, session-based history, and improved UX)
 
     const embedded_data = await fetch("/projects/process_file/", 
         {
@@ -86,6 +93,7 @@ async function uploadFile() {
     const data = await embedded_data.json();
 
     showToast(data.message, data.status);
+<<<<<<< HEAD
     if (data.status === "success") {
     addFileToDisplay(file);
     }
@@ -101,6 +109,11 @@ function addFileToDisplay(file) {
         </div>`;
 }
 
+=======
+    return;
+    }
+
+>>>>>>> 820e458e (refactor(intelliqa): decouple Django views and migrate IntelliQA to AJAX-based JSON workflow with dynamic chat, file upload handling, session-based history, and improved UX)
 fileInput.addEventListener("change", function() {
     if(fileInput.files.length > 0) {
         uploadFile();
@@ -108,7 +121,10 @@ fileInput.addEventListener("change", function() {
     }
 });
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 820e458e (refactor(intelliqa): decouple Django views and migrate IntelliQA to AJAX-based JSON workflow with dynamic chat, file upload handling, session-based history, and improved UX)
 function showToast(message, type = "success") {
     const toast = document.getElementById("toast");
 

@@ -13,27 +13,43 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon_io/favicon-32x32.png' %}">
     <link rel="stylesheet" href="{% static 'css/intelliqa.css' %}">
 </head>
+
 <body>
 
-    <div class="bg-icons-overlay">
-        <i class="fas fa-brain"></i>
-        <i class="fas fa-file-alt"></i>
-        <i class="fas fa-question-circle"></i>
-        <i class="fas fa-microchip"></i>
-        <i class="fas fa-database"></i>
-        <i class="fas fa-book"></i>
-        <i class="fas fa-search"></i>
-        <i class="fas fa-lightbulb"></i>
-    </div>
+<div class="bg-icons-overlay">
+    <i class="fas fa-brain"></i>
+    <i class="fas fa-file-alt"></i>
+    <i class="fas fa-question-circle"></i>
+    <i class="fas fa-microchip"></i>
+    <i class="fas fa-database"></i>
+    <i class="fas fa-book"></i>
+    <i class="fas fa-search"></i>
+    <i class="fas fa-lightbulb"></i>
+</div>
 
+<div class="shell">
+
+    <!-- SIDEBAR -->
+    <aside>
+
+        <!-- BRAND -->
+        <div class="sidebar-brand">
+            <img src="https://ui-avatars.com/api/?name=IQ&background=3d5afe&color=fff"
+                 class="iq-logo"
+                 alt="IQ Logo">
+
+            <h1 class="sidebar-logo-text">IntelliQA</h1>
+        </div>
+        <div id="file-list" class="file-list"></div>
+    </aside>
+
+    <!-- MAIN CHAT AREA -->
     <div class="chatbot-container">
+
+        <!-- MIDDLE HEADER -->
         <header class="chat-header-main">
-            <div class="brand-wrapper">
-                <img src="https://ui-avatars.com/api/?name=IQ&background=3d5afe&color=fff" alt="AI Mascot" class="header-bot-img">
-                <div class="brand-text">
-                    <h1>IntelliQA</h1>
-                    <p>RAG-Powered Document Intelligence</p>
-                </div>
+            <div class="center-tagline">
+                RAG-Powered Document Intelligence
             </div>
         </header>
 
@@ -41,21 +57,26 @@
 
         <div class="input-section" id="inputSection">
             <textarea name="question" id="msg" placeholder="Ask your question here..." rows="1"></textarea>
-            <button type="button" onclick="sendMessage()" class="icon-send-btn" id="sendBtn">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+            <button type="button" onclick="sendMessage()" class="icon-send-btn">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <line x1="22" y1="2" x2="11" y2="13"></line>
                     <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
                 </svg>
             </button>
+
             {% csrf_token %}
             <input type="file" id="file-input" style="display:none;">
-            <button type="button" id="uploadBtn" class="icon-upload-btn" title="Attach File">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+            <button type="button" id="uploadBtn" class="icon-upload-btn">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M21.44 11.05l-9.19 9.19a5.5 5.5 0 0 1-7.78-7.78l9.19-9.19a3.5 3.5 0 0 1 4.95 4.95l-9.2 9.19a1.5 1.5 0 0 1-2.12-2.12l8.49-8.48"/>
                 </svg>
             </button>
         </div>
+
     </div>
+</div>
 
 <div id="toast"></div>
 

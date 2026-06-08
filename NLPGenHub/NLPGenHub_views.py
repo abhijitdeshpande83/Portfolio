@@ -17,75 +17,67 @@ def get_file_hash(file_obj):
 
     return sha256.hexdigest()
 
-def rag_intelliqa(request):
-
+def creat_session_id(request):
     if not request.session.session_key:
         request.session.create()
     session_id = request.session.session_key 
+    return session_id
+
+def process_file(request):
+
+    session_id = creat_session_id(request)
 
     if request.method=='POST':
-        form = UploadFileForm(request.POST, request.FILES)          #Instantiate the Django form 
-        file = request.FILES.get('query_file')                      #Upload file 
-        query=request.POST.get('question')                          # User question    
+        file = request.FILES.get('file')                      #Upload file 
 
-        if file:
-            file_hash = get_file_hash(file)
-            if QueryData.objects.filter(file_hash=file_hash).exists():
-                duplicate_file = QueryData.objects.get(file_hash=file_hash)    #fetching model instance QueryData
-                return render(request, "intelliqa.html", {'form':form,
-                    'answer':f"Duplicate file detected, \
-                        file named {os.path.basename(duplicate_file.query_file.name)} \
-                            already present in the system."})
+    file_hash = get_file_hash(file)
             
-            request.session['file_count'] = request.session.get('file_count', 0)
-
-            if (request.session['file_count']) > 4:
-                return render(request, 'intelliqa.html',\
-                              {'answer':"Upload limit of 5 files reached for this session.", 'form':form})
+    if QueryData.objects.filter(file_hash=file_hash).exists():
+        duplicate_file = QueryData.objects.get(file_hash=file_hash)    #fetching model instance QueryData
+        return JsonResponse({
+            "status": "duplicate",
+            "message": f"Duplicate file detected, file named {os.path.basename(duplicate_file.query_file.name)} already present in the system."})
             
-            form_data = QueryData.objects.create(query_file=file, file_hash=file_hash)
-            form_data.save()
-            file_name = os.path.basename(form_data.query_file.name)
-            file_path = 'media/NLP_data/' + file_name
-        
-            request.session['file_count'] += 1
+    request.session['file_count'] = request.session.get('file_count', 0)
+
+    if (request.session['file_count']) > 4:
+        return JsonResponse({"status": "limit", 
+                             "message": "Upload limit of 5 files reached for this session."}
+                             )
     
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-            raw_text = load_data(file_path)
-            vectorstore_db = vectorstore(persist_directory='media/NLP_data/chroma_db',documents=raw_text)
-=======
-            raw_text = load_data(file_path, session_id)
-=======
-            raw_text = load_data(file_path, session_id, file_name)
-<<<<<<< HEAD
->>>>>>> 8ec38f5a (Update IntelliQA wheel distribution and fix variable mismatch (#45))
-            vectorstore_db = vectorstore(persist_directory='media/NLP_data/chroma_db',texts=raw_text)
->>>>>>> ce96f88b (Updated `NLPGenHub_views.py` to support `session_id` integration with the `rag_pipeline`. (#40))
-=======
-            vectorstore_db = vectorstore(persist_directory='media/NLP_data/chroma_db',documents=raw_text)
->>>>>>> fa71598f (chore(docker): add build/clean scripts, update ignore rules, refactor build script naming (#46))
-=======
-            raw_text = load_data(file_path, session_id, file_name)
-            vectorstore_db = vectorstore(persist_directory='media/NLP_data/chroma_db',texts=raw_text)
->>>>>>> 14122ac1 (fix(intelliqa): correct variable mismatch and standardize documents parameter)
-            return render(request, "intelliqa.html", {'form':form})
+    form_data = QueryData.objects.create(query_file=file, file_hash=file_hash)
+    form_data.save()
+    file_name = os.path.basename(form_data.query_file.name)
+    file_path = 'media/NLP_data/' + file_name
         
-        elif query:
-            if not os.path.exists('media/NLP_data/chroma_db'):
-                return render(request, 'intelliqa.html', {' answer':"No file uploaded. Please upload a file to proceed.", 'form':form})
-            vectorstore_db = vectorstore(persist_directory='media/NLP_data/chroma_db')
-            response = ask_question(query,vectorstore_db,session_id)
-            return render(request, 'intelliqa.html', {'answer':response,'form':form})
-        else:
-            return render(request, 'intelliqa.html', {'answer':"Please enter your question",'form':form})
+    request.session['file_count'] += 1
     
-    else:
-        form = UploadFileForm()
-    return render(request, "intelliqa.html", {'form':form})
+    raw_text = load_data(file_path, session_id, file_name)
+    vectorstore_db = vectorstore(persist_directory='media/NLP_data/chroma_db',documents=raw_text)
+
+    return JsonResponse({"status": "success", "message": "File uploaded and processed successfully."})
 
 
+def rag_pipeline(request):
+
+    session_id = creat_session_id(request)
+
+    data = json.loads(request.body)
+    query = data.get("user_input")
+
+    if not os.path.exists('media/NLP_data/chroma_db'):
+        return JsonResponse({
+                "status": "not_ready",
+                "message": "No knowledge base found. Please upload a file first."
+                })
+    vectorstore_db = vectorstore(persist_directory='media/NLP_data/chroma_db')
+    response = ask_question(query,vectorstore_db,session_id)
+    
+    return JsonResponse({"status": "success", "message": response})
+
+def intelliqa(request):
+    return render(request, "intelliqa.html")
+            
 def intent_classify(request):
 
     INTENT_API_URL = 'https://25hvdlk3p0.execute-api.us-east-1.amazonaws.com/prod/intent_classify'

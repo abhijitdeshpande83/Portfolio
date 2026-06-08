@@ -1,9 +1,11 @@
 from django.urls import path
-from .NLPGenHub_views import rag_intelliqa, intent_classify, rasa, booking_confirmation, \
-                                        atlas, lambda_proxy, aura, aura_agent
+from .NLPGenHub_views import rag_pipeline, process_file, intent_classify, rasa, booking_confirmation, \
+                                        atlas, lambda_proxy, aura, aura_agent, intelliqa
 
 urlpatterns = [
-    path('IntelliQA/', rag_intelliqa, name='rag_intelliqa'),
+    path('rag_pipeline/', rag_pipeline, name='rag_pipeline'),
+    path('intelliqa/', intelliqa, name='intelliqa'),
+    path('process_file/', process_file, name='process_file'),
     path('intent_classify/', intent_classify, name='intent-classify-api'),
     path('rasa_cinemora/', rasa, name='rasa-chatbot'),
     path('booking_confirmation/',booking_confirmation, name='booking_confirmation'),

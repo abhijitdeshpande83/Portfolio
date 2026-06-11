@@ -20,6 +20,7 @@ def get_file_hash(file_obj):
 def creat_session_id(request):
     if not request.session.session_key:
         request.session.create()
+        request.session['file_count'] = 0
     session_id = request.session.session_key 
     return session_id
 
@@ -37,8 +38,6 @@ def process_file(request):
         return JsonResponse({
             "status": "duplicate",
             "message": f"Duplicate file detected, file named {os.path.basename(duplicate_file.query_file.name)} already present in the system."})
-            
-    request.session['file_count'] = request.session.get('file_count', 0)
 
     if (request.session['file_count']) > 4:
         return JsonResponse({"status": "limit", 
@@ -65,7 +64,7 @@ def rag_pipeline(request):
     data = json.loads(request.body)
     query = data.get("user_input")
 
-    if not os.path.exists('media/NLP_data/chroma_db'):
+    if not os.path.exists('media/NLP_data/chroma_db') or request.session['file_count']<1:
         return JsonResponse({
                 "status": "not_ready",
                 "message": "No knowledge base found. Please upload a file first."

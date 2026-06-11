@@ -108,7 +108,6 @@ fileInput.addEventListener("change", function() {
     }
 });
 
-
 function showToast(message, type = "success") {
     const toast = document.getElementById("toast");
 

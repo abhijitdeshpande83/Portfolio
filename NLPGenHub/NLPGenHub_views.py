@@ -1,7 +1,7 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.template.loader import get_template
-from rag_pipeline import load_data, vectorstore, ask_question
+from rag_pipeline import load_data, vectorstore, ask_question, is_supported_file
 from django.views.decorators.csrf import csrf_exempt
 from .forms import UploadFileForm
 from .models import QueryData
@@ -20,6 +20,8 @@ def get_file_hash(file_obj):
 def creat_session_id(request):
     if not request.session.session_key:
         request.session.create()
+
+    if 'file_count' not in request.session:
         request.session['file_count'] = 0
     session_id = request.session.session_key 
     return session_id
@@ -30,6 +32,9 @@ def process_file(request):
 
     if request.method=='POST':
         file = request.FILES.get('file')                      #Upload file 
+    
+    if not is_supported_file(file.name):
+        return JsonResponse({"status": "error", "message": "Unsupported file type. Please upload a supported file."})
 
     file_hash = get_file_hash(file)
             

@@ -7,8 +7,6 @@
     --text-main: #f8fafc;
     --text-dim: #94a3b8;
     --border: rgba(255, 255, 255, 0.1);
-    --accent: #6366f1;
-    --bot-bg: #1e293b;
 }
 
 * {
@@ -235,6 +233,52 @@ aside {
     border-radius: 16px 16px 2px 16px;
 }
 
+/* Markdown rendering */
+.bot .message-content h1,
+.bot .message-content h2,
+.bot .message-content h3 {
+    font-size: 1em;
+    font-weight: 600;
+    margin: 8px 0 4px 0;
+}
+
+.bot .message-content p {
+    margin: 4px 0;
+}
+
+.bot .message-content ul,
+.bot .message-content ol {
+    padding-left: 20px;
+    margin: 4px 0;
+}
+
+.bot .message-content li {
+    margin: 2px 0;
+}
+
+.bot .message-content strong {
+    font-weight: 600;
+}
+
+.bot .message-content code {
+    background: rgba(0,0,0,0.08);
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 0.9em;
+}
+
+.bot .message-content pre {
+    background: rgba(0,0,0,0.08);
+    padding: 10px;
+    border-radius: 6px;
+    overflow-x: auto;
+}
+
+.bot .message-content pre code {
+    background: none;
+    padding: 0;
+}
 
 /* INPUT SECTION */
 

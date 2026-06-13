@@ -56,7 +56,7 @@ async function sendMessage(){
         chat.innerHTML += `
             <div class="bot">
                 <img src="/media/project/IQ-bot.png" class="bot-img" alt="">
-                <div class="message-content">${botResponse}</div>
+                <div class="message-content">${marked.parse(botResponse)}</div>
             </div>
         `;
 
@@ -116,7 +116,7 @@ function showToast(message, type = "success") {
     // color based on type
     if (type === "success") {
         toast.style.background = "#22c55e";
-    } else if (type === "duplicate") {
+    } else if (type === "duplicate" || type === "error") {
         toast.style.background = "#ef4444";
     } else if (type === "limit" || type === "not_ready") {
         toast.style.background = "#f59e0b";

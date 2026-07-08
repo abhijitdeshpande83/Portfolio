@@ -14,6 +14,7 @@ venv*
 
 # Ignore site-packages directory
 **/site-packages/
+.hf_cache/
 
 # Ignore Python cache
 **/__pycache__/

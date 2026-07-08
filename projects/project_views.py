@@ -52,12 +52,12 @@ def process_file(request):
     form_data = QueryData.objects.create(query_file=file, file_hash=file_hash)
     form_data.save()
     file_name = os.path.basename(form_data.query_file.name)
-    file_path = 'media/NLP_data/' + file_name
+    file_path = 'media/RAG_data/' + file_name
         
     request.session['file_count'] += 1
     
     raw_text = load_data(file_path, session_id, file_name)
-    vectorstore_db = vectorstore(persist_directory='media/NLP_data/chroma_db',documents=raw_text)
+    vectorstore_db = vectorstore(documents=raw_text)
 
     return JsonResponse({"status": "success", "message": "File uploaded and processed successfully."})
 
@@ -69,13 +69,13 @@ def rag_pipeline(request):
     data = json.loads(request.body)
     query = data.get("user_input")
 
-    if not os.path.exists('media/NLP_data/chroma_db') or request.session['file_count']<1:
+    if request.session['file_count']<1:
         return JsonResponse({
                 "status": "not_ready",
                 "message": "No knowledge base found. Please upload a file first."
                 })
-    vectorstore_db = vectorstore(persist_directory='media/NLP_data/chroma_db')
-    response = ask_question(query,vectorstore_db,session_id)
+    vectorstore_db = vectorstore()
+    response = ask_question(query, vectorstore_db, session_id)
     
     return JsonResponse({"status": "success", "message": response})
 

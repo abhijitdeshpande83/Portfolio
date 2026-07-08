@@ -1,5 +1,5 @@
 from django.urls import path
-from .NLPGenHub_views import rag_pipeline, process_file, intent_classify, rasa, booking_confirmation, \
+from .project_views import rag_pipeline, process_file, intent_classify, rasa, booking_confirmation, \
                                         atlas, lambda_proxy, aura, aura_agent, intelliqa
 
 urlpatterns = [

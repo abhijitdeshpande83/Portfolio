@@ -15,7 +15,7 @@ class QueryData(models.Model):
     def delete(self, *args, **kwargs):
         if self.query_file and os.path.isfile(self.query_file.path):
             os.remove(self.query_file.path)         # removes file from file system
-        super().delete(*args, **kwargs)             # removes file reference path from DB
+        return super().delete(*args, **kwargs)      # removes file reference path from DB
 
 class ResourceCleanupLog(models.Model):
     file_name = models.CharField(max_length=255, null=True, blank=True)
@@ -23,5 +23,7 @@ class ResourceCleanupLog(models.Model):
     session_id = models.CharField(max_length=64, null=True, blank=True)
 
     def __str__(self):
+        if self.uploaded_at is None:
+            return self.file_name or ""
         uploaded_at_cst =  self.uploaded_at.astimezone(ZoneInfo('America/Chicago'))
         return f"{self.file_name} uploaded at {uploaded_at_cst.strftime('%H:%M:%S %m/%d/%Y')}"

@@ -5,37 +5,34 @@
 {% block body %}
 <section class="section">
   <div class="page">
-    <p class="eyebrow">// skills</p>
+    <h2 class="skills-heading">Skills &amp; Tools</h2>
 
-    <div class="skills-grid">
-      {% for i in skill %}
-      <div class="card skill-card">
-        <div class="skill-head">
-          <img src="/media/{{ i.skill_icon }}" alt="{{ i.title }}">
-          <h3>{{ i.title }}</h3>
+    <div class="buckets">
+      {% regroup tools|dictsort:"tool_category" by tool_category as tool_groups %}
+      {% for group in tool_groups %}
+      <div class="card bucket">
+        <h3 class="bucket-title">{{ group.grouper|default:"Other" }}</h3>
+        <div class="bucket-items">
+          {% for i in group.list %}
+          <span class="tool-chip">
+            <img src="/media/{{ i.tool_icon }}" alt="{{ i.tool_name }}">{{ i.tool_name }}
+          </span>
+          {% endfor %}
         </div>
-        <p>{{ i.description }}</p>
       </div>
       {% endfor %}
     </div>
 
-    <h2 class="band-title"><img src="/media/certifications/certificate.png" alt="Certifications">Certifications</h2>
-    <div class="logo-grid">
-      {% for i in certificate %}
-      <a class="card logo-card" href="{{ i.verification_url }}" target="_blank" rel="noopener noreferrer">
+    <h2 class="skills-heading second">Certifications</h2>
+    <div class="cert-grid">
+      {% for i in certificates %}
+      <a class="card cert-card" href="{{ i.verification_url }}" target="_blank" rel="noopener noreferrer">
         <img src="/media/{{ i.certification_icon }}" alt="{{ i.certification_name }}">
-        <span>{{ i.certification_name }}</span>
+        <div class="cert-meta">
+          <span class="cert-name">{{ i.certification_name }}</span>
+          <span class="cert-verify">Verify &#8599;</span>
+        </div>
       </a>
-      {% endfor %}
-    </div>
-
-    <h2 class="band-title"><img src="/media/tools/tool.png" alt="Tools">Tools</h2>
-    <div class="logo-grid">
-      {% for i in tool %}
-      <div class="card logo-card">
-        <img src="/media/{{ i.tool_icon }}" alt="{{ i.tool_name }}">
-        <span>{{ i.tool_name }}</span>
-      </div>
       {% endfor %}
     </div>
   </div>

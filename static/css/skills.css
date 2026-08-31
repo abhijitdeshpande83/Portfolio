@@ -1,422 +1,58 @@
-/* General styles */
-.container-skills {
-    display: flex;
-    /* background-color: green; */
-    height: 100%;
-    overflow: hidden;
-    padding: 0 7vw;
-    justify-content: space-around;
-    align-items: center;
-}
-.content-container {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    width:fit-content;
-    /* background-color: red; */
-    justify-content: center;
-    align-items: center;
-}
-.rows {
-    display: flex;
-    flex-wrap: wrap;
-    /* background-color: yellow; */
-    justify-content: space-around;
-}
-
-h3 img {
-    width: auto;
-    height: auto;
-    max-width: 2.5vw;
-    max-height: 3.125vh;
-    margin-right: 0.3vw;
-}
-
-.columns h3 {
-    font-size: 1vw;
-    font-weight: bold;
+/* skills: category buckets + certifications */
+.skills-heading {
+    font-family: var(--display);
+    font-size: 1.4rem;
+    font-weight: 600;
     color: #fff;
+    margin: 0 0 22px;
 }
+.skills-heading.second { margin-top: 56px; }
 
-.columns {
-    flex: 1;
-    flex-wrap: wrap;
-    padding: 1vw;
-    margin: 1vw 1vw 1vw 1vw;
-    width: 25vw;
-    height: 24vh;
-    /* border-bottom: 1px solid #eee; */
-    background-color: #141414;
-    border-radius: 1vw;
-    position: relative;
-    /* overflow: hidden;  */
+/* buckets */
+.buckets {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
 }
-
-.columns::before {
-    content: ''; /* Add content */
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    /* background-color: rgb(255, 255, 255);  */
-    filter: blur(20px);
-    z-index: -2;
-    opacity: 0;
+.bucket { padding: 22px 24px; }
+.bucket-title {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 16px;
 }
-
-.columns::after {
-    content: '';
-    position: absolute;
-    inset: -1px;
-    border-radius: 1vw;
-    background: conic-gradient(from var(--angle),#ffffff,#FF6600,#CC5500,#FF9933,#1A1A1A,#ffffff);
-    z-index: -1;
-    opacity: 0;
-    transition: opacity 0.6s ease-in-out; 
-    box-shadow: 0 0 20px 6px rgba(255, 102, 0, 0.15);
-}
-
-.columns:hover::after {
-    opacity: 1; 
-    animation: rotating-glow-border 3.5s linear infinite;
-}
-
-@property --angle {
-    syntax: "<angle>";
-    initial-value: 0deg;
-    inherits: false;
-}
-
-@keyframes rotating-glow-border {
-    from {
-        --angle: 0deg;
-    }
-
-    to {
-        --angle: 360deg;
-    }
-}
-
-@keyframes blur-effect {
-    from {
-        filter: blur(20px);
-    }
-
-    to {
-        filter: blur(19px);
-    }
-}
-
-.slider-container {
-    display: flex;
-    flex-wrap: wrap;
-    /* background-color: purple; */
-    /* flex-direction: column; */
-    /* margin-top: 1vh; */
+.bucket-items { display: flex; flex-wrap: wrap; gap: 10px; }
+.tool-chip {
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    width: 50vw;
-    height: 100%;
-    gap: 1vh; 
+    gap: 10px;
+    font-family: var(--body);
+    font-size: 0.9rem;
+    color: var(--text);
+    background: var(--raised);
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    padding: 9px 14px;
+    transition: border-color .16s ease, transform .16s ease;
 }
+.tool-chip:hover { border-color: var(--line-2); transform: translateY(-1px); }
+.tool-chip img { width: 30px; height: 30px; object-fit: contain; }
 
-.slider {
-    position: relative;
-    display: block;
-    width: 25vw; /* Full width of the container */
-    height: 40vh;
-    margin-top: 1.5vh;
-    /* background-color: olive; */
+/* certifications */
+.cert-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
 }
+.cert-card { display: flex; align-items: center; gap: 16px; padding: 18px 20px; color: var(--text); }
+.cert-card img { width: 64px; height: 64px; object-fit: contain; flex: none; }
+.cert-meta { display: flex; flex-direction: column; gap: 4px; }
+.cert-name { font-family: var(--display); font-weight: 500; font-size: 0.98rem; color: #fff; }
+.cert-verify { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); }
 
-.slider-title {
-    text-align: center;
-    margin-bottom: 1vw; 
-}
-
-.slider-title h4 {
-    color: #fff;
-    font-size: 1.3rem;
-}
-.items-container {
-    display: flex;
-    flex-wrap: wrap;
-    position: relative;
-    /* height: auto; */
-}
-
-.item {
-    flex: 0 0 auto;
-    /* flex-wrap: wrap; */
-    width: auto;
-    height: auto;
-    width: 180px;
-    height: 220px;
-    text-align: justify;
-    background-color: rgba(255, 255, 255, 0.6);
-    border-radius: 2rem;
-    padding: 3vh;
-    transition: 0.5s;
-    position: absolute;
-    left: calc(50% - 7vw);
-    top: 0;
-}
-
-button {
-    position: absolute;
-    top: 42%;
-    color: #fff;
-    background-color: transparent;
-    border: none;
-    font-size: xx-large;
-    font-family: monospace;
-    font-weight: bold;
-    cursor: pointer;
-    z-index: 1;
-    transform: translateY(-50%);
-}
-
-button.prev {
-    left: 5%;
-}
-
-button.next {
-    right: 5%;
-}
-
-h5 {
-    text-align: center;
-    font-size: .9rem; /* Base size */
-    color: black;
-}
-
-.rows h4 {
-    color: #A7A8AA;
-    font-size: 1.05vw;
-}
-
-.content-certificates, .content-tools {
-    font-size: 1.3em; /* Increase font size */
-    /* margin-bottom: 10px;  */
-}
-
-/* Ensure the anchor tag doesn't change the styling of its children */
-.verification_link {
-    text-decoration: none; /* Remove underline */
-    color: inherit; /* Inherit color from parent */
-    display: block; /* Make the anchor tag a block-level element */
-    position: relative; /* Needed for positioning if necessary */
-    transition: transform 0.3s ease; /* Smooth transition for the scaling effect */
-    border-radius: 2rem; /* Optional: rounded corners for the card */
-    overflow: hidden; /* Ensure children don't overflow */
-}
-
-/* Style for the image and text inside the link */
-.verification_link img {
-    display: block; /* Ensure image is treated as block-level for proper spacing */
-    width: 100%; /* Ensure image fits container */
-    height: auto; /* Maintain aspect ratio */
-}
-
-.verification_link h5 {
-    margin: 0; /* Remove default margin */
-    padding: .3vw; /* Optional: add some padding around the text */
-}
-
-.certification-icon, .tool-icon {
-    width: auto;
-    height: auto;
-    max-width: 2.5vw;
-    max-height: 2.5vh;
-    margin-right: .3vw;
-}
-
-/* Media query for screens smaller than 768px */
-@media (max-width: 768px) {
-
-.container-skills {
-    display: flex;
-    flex-direction: column;
-    /* background-color: green; */
-    width: 100vw;
-    height: 100%;
-    overflow: hidden;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.content-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    width: 100vw;
-    height: 100%;
-    /* overflow: auto; */
-    /* width:fit-content; */
-    /* background-color: red; */
-}
-
-.rows {
-    display: flex;
-    /* flex-wrap: wrap; */
-    flex-direction: column;
-    width: 80vw;
-    height: 100%;
-    /* background-color: pink; */
-    /* overflow: auto; */
-    justify-content: center;
-    align-items: center;
-}
-
-.rows h4 {
-    color: #A7A8AA;
-    font-size: .8rem;
-    /* background-color: palevioletred; */
-}
-
-.columns {
-    display: flex;
-    width: 80vw;
-    height: fit-content;
-    /* padding: 0vw; */
-    /* margin: 0; */
-    /* height: 5vh; */
-    /* overflow: auto; */
-    /* border-bottom: 1px solid #eee; */
-    background-color: #141414;
-    border-radius: 2vw;
-}
-
-.columns::after {
-    border-radius: 2vw;
-    background: conic-gradient(from var(--angle),#ffffff,#FF6600,#CC5500,#FF9933,#1A1A1A,#ffffff);
-}
-
-.columns h3 {
-    font-size: .9rem;
-    font-weight: bold;
-    color: #fff;
-}
-
-h3 img {
-    width: auto;
-    height: auto;
-    max-width: 5vw;
-    max-height: 5vh;
-    margin-right: 2vw;
-}
-
-.slider-container {
-    display: flex;
-    flex-direction: column;
-    /* background-color: purple; */
-    align-items: center;
-    justify-content: center;
-    width: 80vw;
-    height: 100%;
-}
-
-.item {
-    /* width: auto;  */
-    /* height: auto;  */
-    max-width: 100px;
-    max-height: 115px;
-    padding: 1.5vh; /* Optionally reduce padding further */
-    border-radius: 1.2rem; /* Smaller border radius for mobile */
-    /* left: calc(30% - 6vw); */
-}
-
-.slider-title h4 {
-    font-size: .7rem;
-}
-
-h5 {
-    font-size: .5rem; /* Base size */
-}
-
-button {
-    top: 37%;
-    font-size: 1rem;
-}
-
-.slider {
-    position: relative;
-    justify-content: center;
-    align-items: center;
-    margin-top: .5vh;
-    width: 60vw; /* Full width of the container */
-    height: 20vh;
-    /* margin-bottom: -7vh; */
-    /* background-color: yellowgreen; */
-}
-
-}
-
-@media (min-width: 769px) and (max-width: 1100px) {
-
-.content-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    width: 100vw;
-    height: 100%;
-    /* overflow: auto; */
-    /* width:fit-content; */
-    /* background-color: red; */
-}
-
-.slider-container {
-    display: flex;
-    flex-direction: column;
-    /* background-color: purple; */
-    /* flex-wrap: wrap; */
-    align-items: center;
-    justify-content: center;
-    width: 40vw;
-    height: 85vh;
-}
-
-.item {
-    /* width: auto;  */
-    /* height: auto;  */
-    max-width: 120px;
-    max-height: 150px;
-    padding: 2.5vh; /* Optionally reduce padding further */
-    border-radius: 1.2rem; /* Smaller border radius for mobile */
-    left: calc(50% - 7vw);
-}
-
-.slider-title h4 {
-    font-size: .85rem;
-}
-
-h5 {
-    font-size: .6rem; /* Base size */
-}
-
-button {
-    top: 42%;
-    font-size: .9rem;
-    margin-right: 2rem;
-    margin-left: -.5rem;
-}
-
-button.prev {
-    left: 5%;
-}
-
-button.next {
-    right: -3%;
-}
-
-.slider {
-    position: relative;
-    justify-content: center;
-    align-items: center;
-    margin-top: 0vh;
-    width: 20vw; /* Full width of the container */
-    height: 45%;
-    /* margin-bottom: -7vh; */
-    /* background-color: orangered; */
-}
-
+@media (max-width: 760px) {
+    .buckets { grid-template-columns: 1fr; }
+    .cert-grid { grid-template-columns: 1fr; }
 }

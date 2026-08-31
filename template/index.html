@@ -1,36 +1,29 @@
 {% extends 'base.html' %}
 {% block title %}Analytic Nerds{% endblock %}
 {% load static %}
-{% block style %}
 
-{% endblock %}
-
-    {% block body %}
-      <div class="container-index">
-        <div class="hello">Hi I'm&nbsp;<span class="name">Abhijit!</span></div>
-        <div class="info">
-            <div class="personal-info">
-                <span class="introduction">This website showcases my journey in technology and research, 
-                    reflecting my passion for innovation. Here, I share insights and project outcomes to 
-                    foster dialogue within the tech community and welcome opportunities for collaboration 
-                    and commissions, offering my unique illustrations and perspective.
-
-                    I am a driven professional currently engaged in contract work, actively seeking full-time 
-                    opportunities in Data Science, Machine Learning, and Data Analysis. With experience in cloud 
-                    technologies, machine learning, statistics, and Python development, I am equipped to deliver 
-                    impactful solutions.
-                </span>
-                <!-- <div class="about">Sr. Business Analyst, AWS Certified, Tableau Specialist</div> -->
-                <!-- <div class="more-about">Driven by curiosity, I continuously seek out opportunities to grow both professionally and personally.</div> -->
-                <div class="buttons">
-                    <button class="download-button" onclick="window.location.href='{% url 'download_cv' %}'">Download CV</button>
-                </div>
-            </div>
-            <div class="personal-pic">
-                {% if profile_data %}
-                <img src="/media/{{profile_data.profile_pic}}" alt="{{ profile_data.profile_name }}">
-                {% endif %}
-            </div>
-        </div>
+{% block body %}
+<section class="hero page">
+  <div class="hero-copy">
+    <p class="eyebrow">// applied ai &amp; ml systems</p>
+    <h1 class="hero-title">Hi, I'm <span class="name">Abhijit</span></h1>
+    <p class="hero-lede">
+      I build and evaluate applied AI systems: LLM evaluation frameworks,
+      retrieval pipelines, and governed agent workflows, with the measurement
+      discipline of an industrial engineer. Currently on contract and open to
+      full-time roles in Data Science, Machine Learning, and Data Analysis.
+    </p>
+    <div class="hero-actions">
+      <button class="btn btn-primary" onclick="window.location.href='{% url 'download_cv' %}'">Download CV</button>
+      <a class="btn" href="{% url 'project' %}">View projects</a>
+      <a class="btn" href="{% url 'contact_me' %}">Contact me</a>
     </div>
-      {% endblock %}
+  </div>
+
+  <div class="hero-pic">
+    {% if profile_data %}
+    <img src="/media/{{ profile_data.profile_pic }}" alt="{{ profile_data.profile_name }}">
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

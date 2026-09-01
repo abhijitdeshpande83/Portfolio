@@ -1,172 +1,94 @@
-.work-experience {
-    position: relative;
-    margin: 100px, auto;
-}
-.work {
-    padding: 0.52vw 2.60vw; 
-    position: relative;
-    width: 70%;
-    /* background-color: grey; */
-    justify-content: center;
-    margin: auto auto 0 auto;
-}
+/* experience: vertical timeline with icon markers */
+.exp-head { margin-bottom: 32px; }
 
-.container-work {
-    padding: 0 3vw;
-    position: relative;
-    width: 100%;
-    background-color: transparent;
-    justify-content: center;
-    margin: auto auto 0 auto;
-    border-radius: 1.5vw;
-    box-shadow: 0 1px 10px rgba(173, 216, 250, .2);
-}
+.exp-timeline { display: flex; flex-direction: column; }
 
-.experience {
-    padding: 1.04vw 1.04vw;
-    /* background: red; */
-    position: relative;
-    color: white;
-    font-size: 0.8125rem;
-}
+.exp-item { display: flex; gap: 18px; }
 
-.experience .company-timeline {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: -.2vh;
-    /* background-color: red; */
-}
-
-.location {
-    font-style: italic;
-}
-
-.experience .role-location {
-    display: flex;
-    justify-content: space-between;
-    font-size: small;
-    align-items: center;
-    font-style: italic;
-}
-
-.project-title {
-    font-size: .9rem;
-    margin-bottom: 1.5vh;
-}
-
-.container-work img {
+.exp-rail { position: relative; flex: none; width: 46px; }
+.exp-rail::before {
+    content: "";
     position: absolute;
-    width: 25px;
-    height: 25px;
-    left: 20px;
-    top:20px;
-    z-index: 1px;
-    /* border: 1px solid white; */
-    /* border-radius: 5px; */
+    left: 50%;
+    transform: translateX(-50%);
+    top: 46px;
+    bottom: -24px;
+    width: 2px;
+    background: var(--line-2);
 }
+.exp-item:last-child .exp-rail::before { display: none; }
 
-h2 {
-    font-size: 1.0625rem;
-    font-weight: bold;
-}
-
-h3 {
-    font-size: 0.9375rem;
-    color: white;
-    /* font-style: italic; */
-}
-
-.container-education img {
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    left: 20px;
-    top:10px;
-    z-index: 1px;
-    /* border: 1px solid white; */
-    /* border-radius: 15px; */
-}
-
-.container-education {
-    padding: 1vh 1.7vw;
+.exp-marker {
     position: relative;
-    width: 100%;
-    /* background-color: green; */
-    justify-content: center;
-    margin: auto auto 0 auto;
-}
-
-.graduation {
-    padding: 0vw 2.6vw;
-    /* background: red; */
-    position: relative;
-    color: white;
-    font-size: 13px;
-}
-
-.education {
-    padding: 0.52vw 2.6vw;
-    position: relative;
-    width: 70%;
-    /* background-color: rgb(128, 0, 113); */
+    z-index: 1;
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    display: flex;
     align-items: center;
-    margin: auto auto 0 auto;
-}
-
-h1 {
-    font-size: 30px;
-    font-weight: bold;
-    color: white;
-    margin-left: 20px;
-}
-
-h6 {
-    color: #A7A8AA;
-}
-
-@media (max-width: 768px) {
-
-.work {
-    padding: 0; 
-    /* position: relative; */
-    width: 100%;
-    /* background-color: grey; */
     justify-content: center;
-    margin: auto auto 0 auto;
+    font-size: 1.3rem;
+}
+.exp-marker img { width: 30px; height: 30px; object-fit: contain; }
+
+.exp-content { flex: 1; padding-bottom: 24px; }
+.exp-item:last-child .exp-content { padding-bottom: 0; }
+
+.exp-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r);
+    padding: 20px 22px;
 }
 
-.location, .timeline {
-    display: none;
-}
+.exp-top { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; flex-wrap: wrap; margin: 0 0 4px; }
+.exp-company { font-family: var(--display); font-size: 1.15rem; font-weight: 600; color: #fff; margin: 0; }
+.exp-time { font-family: var(--mono); font-size: 0.82rem; color: var(--faint); white-space: nowrap; }
 
-.container-work {
-    padding: 0 12vw;
-    width: 100%;
-    /* background-color: green; */
-    border-radius: none;
-    box-shadow: none;
-}
+.exp-role { font-size: 0.98rem; color: var(--accent); margin: 0 0 6px; }
+.exp-loc { color: var(--muted); font-style: italic; }
 
-.experience {
-    padding: 4vw 4vw;
-    font-size: 0.8125rem;
-}
+.exp-project { font-size: 0.92rem; color: var(--text); margin: 0 0 10px; }
 
-.container-education {
-    padding: 0 12vw;
-    width: 100%;
-    /* background-color: blueviolet; */
-}
+/* description holds stored HTML (lists, bold, etc.) */
+.exp-desc { font-size: 0.95rem; color: var(--muted); line-height: 1.7; }
+.exp-desc ul { margin: 6px 0 0; padding-left: 20px; }
+.exp-desc li { margin: 0 0 6px; }
+.exp-desc li::marker { color: var(--accent); }
+.exp-desc p { margin: 0 0 8px; }
 
-.education {
-    padding: 0vw;
-    position: relative;
+/* education: vertical cards with icons */
+.edu-head { margin-top: 52px; }
+.edu-list { display: flex; flex-direction: column; gap: 16px; }
+.edu-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r);
+    padding: 20px 22px;
+}
+.edu-icon {
+    flex: none;
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    display: flex;
     align-items: center;
-    margin: auto auto 0 auto;
-    padding: 0;
-    width: 100%;
-    /* background-color: rgb(128, 0, 113); */
+    justify-content: center;
+    font-size: 1.3rem;
 }
+.edu-icon img { width: 30px; height: 30px; object-fit: contain; }
+.edu-body h3 { font-family: var(--display); font-size: 1.1rem; font-weight: 600; color: #fff; margin: 0 0 6px; }
+.edu-school { color: var(--accent); font-size: 0.95rem; margin: 0 0 8px; }
+.edu-meta { color: var(--muted); font-size: 0.92rem; }
 
+@media (max-width: 560px) {
+    .exp-item { gap: 14px; }
+    .exp-card { padding: 18px; }
 }

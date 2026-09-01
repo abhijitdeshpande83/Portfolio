@@ -1,39 +1,30 @@
-/* thank you page */
-.ty-wrap {
-    min-height: calc(100vh - 68px);
-    display: flex; align-items: center; justify-content: center;
-    text-align: center; padding: 40px 24px;
-}
-.ty-card { max-width: 540px; }
+/* contact */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 46px; align-items: start; }
+.contact-sub { color: var(--muted); margin: 0 0 24px; max-width: 44ch; }
 
-.ty-icon {
-    position: relative;
-    width: 66px; height: 66px; border-radius: 16px;
-    background: var(--accent-soft); color: var(--accent);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 2rem; margin: 0 auto 24px;
-    animation: ty-pop 0.55s cubic-bezier(0.2, 0.8, 0.2, 1.2) both;
+.contact-socials { display: flex; gap: 12px; }
+.contact-socials a {
+    width: 48px; height: 48px; border-radius: 10px;
+    display: inline-flex; align-items: center; justify-content: center;
+    border: 1px solid var(--line-2); color: var(--text); font-size: 20px;
+    transition: border-color .16s ease, color .16s ease, transform .16s ease;
 }
-.ty-icon::before {
-    content: "";
-    position: absolute; inset: -6px;
-    border-radius: 20px;
-    border: 2px solid var(--accent);
-    opacity: 0;
-    animation: ty-ring 1.1s ease-out 0.3s both;
+.contact-socials a:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+/* form */
+.contact-card { padding: 26px; }
+.contact-card form { display: flex; flex-direction: column; }
+.contact-card p { margin: 0 0 16px; display: flex; flex-direction: column; }
+.contact-card label { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); margin: 0 0 7px; }
+.contact-card input, .contact-card textarea, .contact-card select {
+    width: 100%; padding: 12px 13px;
+    font-family: var(--body); font-size: 0.98rem; color: var(--text);
+    background: var(--bg); border: 1px solid var(--line-2); border-radius: 9px;
+    transition: border-color .16s ease;
 }
+.contact-card input::placeholder, .contact-card textarea::placeholder { color: var(--faint); }
+.contact-card input:focus, .contact-card textarea:focus, .contact-card select:focus { outline: none; border-color: var(--accent); }
+.contact-card textarea { min-height: 130px; resize: vertical; }
+.contact-submit { align-self: flex-start; margin-top: 6px; }
 
-.ty-card h1 { font-family: var(--display); font-size: clamp(32px, 5vw, 48px); color: #fff; margin: 0 0 14px; animation: ty-rise 0.5s ease both 0.15s; }
-.ty-card p { color: var(--muted); margin: 0 0 8px; }
-.ty-line-1 { animation: ty-rise 0.5s ease both 0.24s; }
-.ty-line-2 { animation: ty-rise 0.5s ease both 0.30s; }
-.ty-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 28px; animation: ty-rise 0.5s ease both 0.4s; }
-
-@keyframes ty-pop { 0% { opacity: 0; transform: scale(0.6); } 60% { transform: scale(1.08); } 100% { opacity: 1; transform: scale(1); } }
-@keyframes ty-ring { 0% { opacity: 0.6; transform: scale(0.82); } 100% { opacity: 0; transform: scale(1.28); } }
-@keyframes ty-rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
-
-@media (prefers-reduced-motion: reduce) {
-    .ty-icon, .ty-icon::before, .ty-card h1, .ty-line-1, .ty-line-2, .ty-actions { animation: none; }
-    .ty-icon::before { display: none; }
-}
+@media (max-width: 780px) { .contact-grid { grid-template-columns: 1fr; gap: 32px; } }

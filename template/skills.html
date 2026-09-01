@@ -1,73 +1,40 @@
 {% extends 'base.html' %}
 {% block title %}Skills{% endblock %}
 {% load static %}
-{% block style %}
-
-{% endblock %}
 
 {% block body %}
-<div class="container-skills">
-    <div class="content-container">
-    {% for row_number in row_numbers %}
-        <div class="rows">    
-        {% for i in skill %}
-            {% if i.row_number == row_number %}
-                    {% if i.column_number == 1 %}
-                        <div class="columns">
-                            <h3><img src="/media/{{ i.skill_icon }}" alt="{{ i.title }}">{{ i.title }}</h3>
-                            <h4>{{ i.description }}</h4>
-                        </div>
-                    {% else %}
-                        <div class="columns">
-                            <h3><img src="/media/{{ i.skill_icon }}" alt="{{ i.title }}">{{ i.title }}</h3>
-                            <h4>{{ i.description }}</h4>
-                        </div>
-                    {% endif %}
-            {% endif %}
-        {% endfor %}
-        </div>
-    {% endfor %}
-    </div>
-            
-    <div class="slider-container">
-        <!-- Certifications Slider -->
-        <div class="slider" id="certifications-slider">
-            <div class="slider-title">
-                <h4><img src="/media/certifications/certificate.png" alt="Certification Icon" class="certification-icon">Certifications</h4>
-            </div>
-            <div class="items-container">
-                {% for i in certificate %}
-                <div class="item">
-                    <a href="{{ i.verification_url }}" target="_blank" rel="noopener noreferrer" class="verification_link">
-                        <img src="/media/{{ i.certification_icon }}" class="card-img-top" alt="{{ i.certification_name }}">
-                        <h5>{{ i.certification_name }}</h5>
-                    </a>
-                </div>
-                {% endfor %}
-            </div>
-            <button class="prev" id="prev-certifications-slider">&#9664;</button>
-            <button class="next" id="next-certifications-slider">&#9654;</button>       
-        </div>
+<section class="section">
+  <div class="page">
+    <h2 class="skills-heading">Skills &amp; Tools</h2>
 
-        <!-- Tools Slider -->
-        <div class="slider" id="tools-slider">
-            <div class="slider-title">
-                <h4><img src="/media/tools/tool.png" alt="Tool Icon" class="tool-icon">Tools</h4>
-            </div>
-            <div class="items-container">
-                {% for i in tool %}
-                <div class="item">
-                    <img src="/media/{{ i.tool_icon }}" class="card-img-top" alt="{{ i.tool_name }}">              
-                    <h5>{{ i.tool_name }}</h5>
-                </div>
-                {% endfor %}
-            </div>
-            <button class="prev" id="prev-tools-slider">&#9664;</button>
-            <button class="next" id="next-tools-slider">&#9654;</button>
+    <div class="buckets">
+      {% regroup tools|dictsort:"tool_category" by tool_category as tool_groups %}
+      {% for group in tool_groups %}
+      <div class="card bucket">
+        <h3 class="bucket-title">{{ group.grouper|default:"Other" }}</h3>
+        <div class="bucket-items">
+          {% for i in group.list %}
+          <span class="tool-chip">
+            <img src="/media/{{ i.tool_icon }}" alt="{{ i.tool_name }}">{{ i.tool_name }}
+          </span>
+          {% endfor %}
         </div>
+      </div>
+      {% endfor %}
     </div>
-</div>
 
-<script src="{% static 'skills.js' %}"></script>
-<script src="{% static 'animate.js' %}"></script>
+    <h2 class="skills-heading second">Certifications</h2>
+    <div class="cert-grid">
+      {% for i in certificates %}
+      <a class="card cert-card" href="{{ i.verification_url }}" target="_blank" rel="noopener noreferrer">
+        <img src="/media/{{ i.certification_icon }}" alt="{{ i.certification_name }}">
+        <div class="cert-meta">
+          <span class="cert-name">{{ i.certification_name }}</span>
+          <span class="cert-verify">Verify &#8599;</span>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
 {% endblock %}

@@ -1,44 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login</title>
     {% load static %}
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon_io/favicon-16x16.png' %}">
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon_io/favicon-32x32.png' %}">
     <link rel="icon" type="image/png" sizes="192x192" href="{% static 'favicon_io/android-chrome-192x192.png' %}">
     <link rel="icon" type="image/png" sizes="512x512" href="{% static 'favicon_io/android-chrome-512x512.png' %}">
     <link rel="apple-touch-icon" href="{% static 'favicon_io/apple-touch-icon.png' %}">
     <link rel="icon" href="{% static 'favicon_io/favicon.ico' %}">
-    <link rel="manifest" href="{% static 'favicon_io/site.webmanifest' %}">    
+    <link rel="manifest" href="{% static 'favicon_io/site.webmanifest' %}">
     <link rel="stylesheet" href="{% static '/css/login.css' %}">
 </head>
 
 <body>
-    <div class="login-container">
-        <h2>Admin Login</h2>
-        <p>This portal is for administrators only.</p>
+    <div class="login-page">
+        <div class="login-card">
+            <div class="login-badge"><i class="fas fa-lock"></i></div>
+            <h1>Admin Login</h1>
+            <p class="login-sub">This portal is for administrators only.</p>
 
-        <form method="POST">
-            {% csrf_token %}
-            <div class="form-group">
-                <input type="text" name="username" placeholder="Admin username" class="form-input" required>
-            </div>
-            <div class="form-group">
-                <input type="password" name="password" placeholder="Admin password" class="form-input" required>
-            </div>
-            <div class="button-group">
-                <button type="submit" class="login-btn">Login
-                    <i class="fas fa-arrow-right-to-bracket"></i></button>
-                <a href="{% url 'index' %}" class="login-btn">
-                    <i class="fas fa-home"></i></a>
-            </div>
-        </form>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="field">
+                    <input type="text" name="username" placeholder="Admin username" required>
+                </div>
+                <div class="field">
+                    <input type="password" name="password" placeholder="Admin password" required>
+                </div>
+                <div class="login-actions">
+                    <button type="submit" class="lbtn primary">Login <i class="fas fa-arrow-right-to-bracket"></i></button>
+                    <a href="{% url 'index' %}" class="lbtn ghost" aria-label="Home"><i class="fas fa-home"></i></a>
+                </div>
+            </form>
+        </div>
     </div>
 </body>
-
 </html>

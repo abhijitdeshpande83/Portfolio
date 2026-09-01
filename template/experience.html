@@ -1,54 +1,53 @@
 {% extends 'base.html' %}
 {% block title %}Experience{% endblock %}
 {% load static %}
-{% block style %}
-{% endblock %}
-{% block body %}
-<div class="work-experience"> 
-    <div class="work">
-        <h1>Work Experience</h1>
-    {% for i in experience %}
-    <div class="container-work">
-        <img src="/media/experience/work.png">
-        <div class="experience">
-            <div class="company-timeline">
-                <h2>{{ i.company_name }}</h2>
-                {% if i.timeline %}
-                    <small class="location">{{ i.timeline }}</small>
-                {% endif %}
-            </div>
-        
-            <div class="role-location">
-                <h3>{{ i.role }}</h3>
-                {% if i.location %}
-                    <small class="timeline">{{ i.location }}</small>
-                {% endif %}
-            </div>
-            <h4 class="project-title">{{ i.project_title }}</h4>
-            <h6>{{ i.company_experience|safe }}</h6>
-        </div>
-    </div><br>
-    {% endfor %}
-</div> 
-    <div class="education">
-        <h1>Education</h1>
-    <div class="container-education">
-        <img src="/media/experience/education.png">
-        <div class="graduation">
-            <h2>University of Texas Arlington</h2>
-            <small>Master of Science in Industrial Engineering</small><br>
-            <small>Jan 2020 - May 2022</small>
-        </div>
-    </div>
-    <div class="container-education">
-        <img src="/media/experience/education.png">
-        <div class="graduation">
-            <h2>Shivaji University</h2>        
-            <small>Bachelor of Engineering</small><br>
-            <small>Aug 2014 - May 2018</small>
-        </div>
-    </div>
-</div>
-</div>
 
+{% block body %}
+<section class="section">
+  <div class="page">
+    <h2 class="section-title exp-head">Experience</h2>
+
+    <div class="exp-timeline">
+      {% for exp in experience %}
+      <div class="exp-item">
+        <!-- Swap the <i> for an <img> to show a company logo -->
+        <div class="exp-rail"><div class="exp-marker"><i class="bi bi-briefcase-fill"></i></div></div>
+        <div class="exp-content">
+          <div class="exp-card">
+            <div class="exp-top">
+              <h3 class="exp-company">{{ exp.company_name }}</h3>
+              {% if exp.timeline %}<span class="exp-time">{{ exp.timeline }}</span>{% endif %}
+            </div>
+            <div class="exp-role">
+              {{ exp.role }}{% if exp.location %} <span class="exp-loc">&middot; {{ exp.location }}</span>{% endif %}
+            </div>
+            {% if exp.project_title %}<div class="exp-project">{{ exp.project_title }}</div>{% endif %}
+            {% if exp.company_experience %}<div class="exp-desc">{{ exp.company_experience|safe }}</div>{% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Education: edit the text to your exact wording. Swap the <i> for an <img> to use a logo. -->
+    <h2 class="section-title exp-head edu-head">Education</h2>
+    <div class="edu-list">
+      <div class="edu-card">
+        <div class="edu-icon"><i class="bi bi-mortarboard-fill"></i></div>
+        <div class="edu-body">
+          <h3>MS, Industrial Engineering</h3>
+          <div class="edu-school">University of Texas at Arlington</div>
+          <div class="edu-meta">3.9 GPA &middot; Design of Experiments, Statistical Methods, Machine Learning</div>
+        </div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-icon"><i class="bi bi-mortarboard-fill"></i></div>
+        <div class="edu-body">
+          <h3>BE, Mechanical Engineering</h3>
+          <div class="edu-school">Bachelor of Engineering</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock %}

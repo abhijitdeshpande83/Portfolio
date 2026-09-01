@@ -1,36 +1,97 @@
 {% extends 'base.html' %}
 {% block title %}Analytic Nerds{% endblock %}
 {% load static %}
-{% block style %}
 
-{% endblock %}
+{% block body %}
+<section class="hero">
+  <span class="hero-glow"></span>
+  <span class="hero-glow hero-glow-2"></span>
 
-    {% block body %}
-      <div class="container-index">
-        <div class="hello">Hi I'm&nbsp;<span class="name">Abhijit!</span></div>
-        <div class="info">
-            <div class="personal-info">
-                <span class="introduction">This website showcases my journey in technology and research, 
-                    reflecting my passion for innovation. Here, I share insights and project outcomes to 
-                    foster dialogue within the tech community and welcome opportunities for collaboration 
-                    and commissions, offering my unique illustrations and perspective.
+  <svg class="hero-net" aria-hidden="true" viewBox="0 0 520 520" preserveAspectRatio="xMidYMid slice">
+    <g class="net-edges">
+      <line x1="70" y1="90" x2="160" y2="55"/>
+      <line x1="160" y1="55" x2="255" y2="110"/>
+      <line x1="70" y1="90" x2="120" y2="185"/>
+      <line x1="120" y1="185" x2="215" y2="180"/>
+      <line x1="160" y1="55" x2="215" y2="180"/>
+      <line x1="255" y1="110" x2="215" y2="180"/>
+      <line x1="255" y1="110" x2="305" y2="175"/>
+      <line x1="305" y1="175" x2="385" y2="120"/>
+      <line x1="215" y1="180" x2="165" y2="275"/>
+      <line x1="215" y1="180" x2="265" y2="260"/>
+      <line x1="305" y1="175" x2="265" y2="260"/>
+      <line x1="385" y1="120" x2="445" y2="205"/>
+      <line x1="305" y1="175" x2="355" y2="250"/>
+      <line x1="265" y1="260" x2="355" y2="250"/>
+      <line x1="355" y1="250" x2="445" y2="205"/>
+      <line x1="445" y1="205" x2="470" y2="280"/>
+      <line x1="165" y1="275" x2="215" y2="350"/>
+      <line x1="265" y1="260" x2="300" y2="340"/>
+      <line x1="355" y1="250" x2="405" y2="320"/>
+      <line x1="405" y1="320" x2="470" y2="280"/>
+      <line x1="215" y1="350" x2="300" y2="340"/>
+      <line x1="300" y1="340" x2="365" y2="430"/>
+      <line x1="300" y1="340" x2="265" y2="440"/>
+      <line x1="405" y1="320" x2="365" y2="430"/>
+      <line x1="215" y1="350" x2="265" y2="440"/>
+    </g>
+    <g class="net-nodes">
+      <circle cx="70" cy="90" r="4.5"/>
+      <circle cx="160" cy="55" r="4.5"/>
+      <circle cx="255" cy="110" r="4.5"/>
+      <circle cx="120" cy="185" r="4.5"/>
+      <circle cx="215" cy="180" r="6" class="n-accent"/>
+      <circle cx="305" cy="175" r="4.5"/>
+      <circle cx="385" cy="120" r="4.5"/>
+      <circle cx="165" cy="275" r="4.5"/>
+      <circle cx="265" cy="260" r="4.5"/>
+      <circle cx="355" cy="250" r="6" class="n-accent"/>
+      <circle cx="445" cy="205" r="6" class="n-accent"/>
+      <circle cx="470" cy="280" r="4.5"/>
+      <circle cx="215" cy="350" r="4.5"/>
+      <circle cx="300" cy="340" r="6" class="n-accent"/>
+      <circle cx="405" cy="320" r="4.5"/>
+      <circle cx="365" cy="430" r="4.5"/>
+      <circle cx="265" cy="440" r="4.5"/>
+    </g>
+  </svg>
 
-                    I am a driven professional currently engaged in contract work, actively seeking full-time 
-                    opportunities in Data Science, Machine Learning, and Data Analysis. With experience in cloud 
-                    technologies, machine learning, statistics, and Python development, I am equipped to deliver 
-                    impactful solutions.
-                </span>
-                <!-- <div class="about">Sr. Business Analyst, AWS Certified, Tableau Specialist</div> -->
-                <!-- <div class="more-about">Driven by curiosity, I continuously seek out opportunities to grow both professionally and personally.</div> -->
-                <div class="buttons">
-                    <button class="download-button" onclick="window.location.href='{% url 'download_cv' %}'">Download CV</button>
-                </div>
-            </div>
-            <div class="personal-pic">
-                {% if profile_data %}
-                <img src="/media/{{profile_data.profile_pic}}" alt="{{ profile_data.profile_name }}">
-                {% endif %}
-            </div>
-        </div>
+  <div class="page hero-inner">
+    <p class="hero-kicker">Abhijit Deshpande <span>/ Applied AI &amp; ML</span></p>
+
+    <!-- Tagline: change this line to reword your headline -->
+    <h1 class="hero-title">I build production AI <span class="name">teams can trust</span>.</h1>
+
+    <p class="hero-lede">
+      I build and evaluate LLM systems: evaluation frameworks, retrieval
+      pipelines, and governed agent workflows, with the measurement discipline
+      of an industrial engineer. Open to full-time roles in Data Science,
+      Machine Learning, and Data Analysis.
+    </p>
+
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="{% url 'download_cv' %}">Download CV</a>
+      <a class="btn" href="{% url 'project' %}">View projects</a>
+      <a class="btn" href="{% url 'contact_me' %}">Contact me</a>
     </div>
-      {% endblock %}
+
+    <div class="hero-highlights">
+      <div class="hl">
+        <div class="hl-icon"><i class="bi bi-graph-up-arrow"></i></div>
+        <div class="hl-k">Measured, not guessed</div>
+        <div class="hl-v">Evaluation frameworks and grounded output contracts, so model behavior is provable, not assumed.</div>
+      </div>
+      <div class="hl">
+        <div class="hl-icon"><i class="bi bi-rocket-takeoff"></i></div>
+        <div class="hl-k">Production-ready</div>
+        <div class="hl-v">I take LLM and ML systems from prototype to reliable, governed products.</div>
+      </div>
+      <div class="hl">
+        <div class="hl-icon"><i class="bi bi-shield-check"></i></div>
+        <div class="hl-k">Built to be trusted</div>
+        <div class="hl-v">Human-in-the-loop governance and audit trails, communicated clearly to every stakeholder.</div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,44 +1,35 @@
 {% extends 'base.html' %}
 {% block title %}Projects{% endblock %}
 {% load static %}
-{% block style %}
-
-{% endblock %}
 
 {% block body %}
-<div class="project">
-    {% for category, project_list in grouped_projects.items %}
-      <div class="project-category">
-        <h1 class="category">{{ category|default:"Uncategorized" }}</h1>
-  
+<section class="section">
+  <div class="page">
+    <div class="projects-grid">
+      {% for category, project_list in grouped_projects.items %}
         {% for project in project_list %}
-            {% if forloop.first or forloop.counter0|divisibleby:3 %}
-            <div class="project-row">
+        <div class="card project-card">
+          <div class="project-thumb {% cycle 'g1' 'g2' 'g3' 'g4' 'g5' %}">
+            {% if project.project_image %}
+            <img src="/media/{{ project.project_image }}" alt="{{ project.project_name }}">
+            {% else %}
+            <span>{{ project.project_name|slice:":1"|upper }}</span>
             {% endif %}
-  
-                <div class="project-column">
-                     <div class="project-card">
-                        <div class="front-card">
-                            <h3 class="project-name">{{ project.project_name }}</h3>
-                        </div>    
-                        <div class="back-card">
-                            {% if project.link %}
-                            <a href="{{ project.link }}" target="_blank" class="project-button ">View</a>
-                            {% else %}
-                            <h6 class="project-description">{{ project.project_description }}</h6>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-  
-            {% if forloop.counter|divisibleby:3 or forloop.last %}
-            </div>
-          {% endif %}
+          </div>
+          <div class="project-body">
+            <span class="project-tag">{{ category|default:"Project" }}</span>
+            <h3 class="project-name">{{ project.project_name }}</h3>
+            {% if project.project_description %}
+            <p class="project-description">{{ project.project_description }}</p>
+            {% endif %}
+            {% if project.link %}
+            <a class="project-link" href="{{ project.link }}" target="_blank" rel="noopener noreferrer">View project &#8599;</a>
+            {% endif %}
+          </div>
+        </div>
         {% endfor %}
-      </div>
-    {% endfor %}
+      {% endfor %}
+    </div>
   </div>
-   
-<script src="{% static 'projects.js' %}"></script>
-
+</section>
 {% endblock %}

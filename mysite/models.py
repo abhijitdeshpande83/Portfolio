@@ -1,35 +1,39 @@
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
+from django.core.files.storage import FileSystemStorage
 
+class OverwriteStorage(FileSystemStorage):
+    def get_available_name(self, name, max_length=None):
+        if self.exists(name):
+            self.delete(name)
+        return name
 
 # Create your models here.
 class Certification(models.Model):
     certification_id = models.AutoField(primary_key=True)
-    certification_rank = models.IntegerField(default=99, blank=True) 
-    certification_name = models.CharField(max_length=100, default='')
-    certification_icon = models.FileField(upload_to='certifications', default='')
-    verification_url = models.CharField(max_length=200, default='')
+    certification_name = models.CharField(max_length=100, default='', blank=True)
+    certification_icon = models.FileField(upload_to='certifications', default='', storage=OverwriteStorage())
+    verification_url = models.CharField(max_length=200, default='', blank=True)
 
     def __str__(self) -> str:
         return self.certification_name
 
 class Tool(models.Model):
     tool_id = models.AutoField(primary_key=True)
-    tool_rank = models.IntegerField(default=99, blank=True) 
-    tool_name = models.CharField(max_length=100, default='')
-    tool_icon = models.FileField(upload_to='tools', default='') 
+    tool_name = models.CharField(max_length=100, default='', blank=True)
+    tool_category = models.CharField(max_length=50, default='', blank=True, null=True)
+    tool_icon = models.FileField(upload_to='tools', default='', storage=OverwriteStorage())
 
     def __str__(self) -> str:
         return self.tool_name
     
 class Contact(models.Model):
     first_name = models.CharField(max_length=15, default='')
-    last_name =  models.CharField(max_length=15, default='', blank=True,)
+    last_name =  models.CharField(max_length=15, default='')
     email = models.EmailField(max_length=50)
     contact_number = PhoneNumberField(blank=True, null=True)
     message = models.TextField(max_length=2500,blank=True)
-    timestamp = models.DateTimeField(auto_now_add=True) 
-
+    timestamp = models.DateTimeField(auto_now_add=True)
 
     def get_full_name(self):
         return f"{self.first_name} {self.last_name}"
@@ -63,21 +67,20 @@ class Skill(models.Model):
         return self.title
 
 class ProfileAsset(models.Model): 
-    profile_name = models.CharField(max_length=20, default='profile',blank=True)
-    profile_pic = models.ImageField(upload_to='connectme', default='',blank=True)
-    resume_file_name = models.CharField(max_length=20, default='resume',blank=True)
-    resume_file = models.FileField(upload_to='cv', default='',blank=True)
+    resume_file_name = models.CharField(max_length=20, default='resume', blank=True)
+    resume_file = models.FileField(upload_to='cv', default='', blank=True, storage=OverwriteStorage())
 
     def __str__(self):
         return 'Profile Data'
 
 class Project(models.Model):
-    project_number = models.IntegerField(default='99',blank=True)
+    project_number = models.IntegerField(default=99,blank=True)
     project_category = models.CharField(max_length=50, default='', blank=True)
     project_name = models.CharField(max_length=200, default='')
     timeline = models.CharField(max_length=20, default='', blank=True)
     project_description = models.TextField(default='',blank=True)
-    project_doc = models.FileField(upload_to='projects', default='',blank=True)
+    project_image = models.ImageField(upload_to='project_images', blank=True, null=True, storage=OverwriteStorage())
+    project_doc = models.FileField(upload_to='projects', default='',blank=True, storage=OverwriteStorage())
     tools = models.CharField(max_length=100, default='', blank=True)
     link = models.CharField(max_length=200, default='', blank=True)
 

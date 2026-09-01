@@ -46,14 +46,14 @@ def contact_me(request):
     return render(request, 'contact_me.html')
 
 def skills(request):
-    certifications = Certification.objects.all().order_by('certification_rank')
-    tools = Tool.objects.all().order_by('tool_rank')
+    certificates = Certification.objects.all()
+    tools = Tool.objects.all()
     skills = Skill.objects.all().order_by('row_number', 'column_number')
     total_rows = Skill.objects.values_list('row_number', flat=True).distinct().count()
     row_numbers = list(range(1, total_rows + 1))  # Create a list of number of rows
 
 
-    params = {'certificate': certifications, 'tool':tools,  'skill': skills, 'row_numbers': row_numbers} 
+    params = {'certificates': certificates, 'tools':tools,  'skills': skills, 'row_numbers': row_numbers}
     return render(request, 'skills.html', params)
 
 def thankyou(request):
@@ -129,12 +129,15 @@ def experience(request):
 
 def download_cv(request):
     resume = ProfileAsset.objects.all().first()
-    if resume.resume_file:
-        file_path = resume.resume_file.path
-        file_name = resume.resume_file.name
-        _, file_extension = os.path.splitext(file_name) 
-        return FileResponse(open(file_path, 'rb'), as_attachment=True, filename=f"Abhijit_Deshpande_Resume{file_extension}")
-    else:
+    if resume is None or not resume.resume_file:
         raise Http404("Resume file not found.")
+
+    file_path = resume.resume_file.path
+    file_name = resume.resume_file.name
+    _, file_extension = os.path.splitext(file_name) 
+    return FileResponse(open(file_path, 'rb'), as_attachment=True, filename=f"Abhijit_Deshpande_Resume{file_extension}")
+   
+
+
 
  

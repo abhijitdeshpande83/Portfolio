@@ -1,6 +1,12 @@
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
-from .storage import OverwriteStorage
+from django.core.files.storage import FileSystemStorage
+
+class OverwriteStorage(FileSystemStorage):
+    def get_available_name(self, name, max_length=None):
+        if self.exists(name):
+            self.delete(name)
+        return name
 
 # Create your models here.
 class Certification(models.Model):

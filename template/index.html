@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Analytic Mind{% endblock %}
+{% block title %}Analytic Nerds{% endblock %}
 {% load static %}
 
 {% block body %}
@@ -60,33 +60,36 @@
     <p class="hero-kicker">Abhijit Deshpande <span>/ Applied AI &amp; ML</span></p>
 
     <!-- Tagline: change this line to reword your headline -->
-    <h1 class="hero-title">I build AI systems you can <span class="name">measure and trust</span>.</h1>
+    <h1 class="hero-title">I build production AI <span class="name">teams can trust</span>.</h1>
 
     <p class="hero-lede">
-      Applied AI and ML: LLM evaluation frameworks, retrieval pipelines, and
-      governed agent workflows, with the measurement discipline of an industrial
-      engineer. Open to full-time roles in Data Science, Machine Learning, and
-      Data Analysis.
+      I build and evaluate LLM systems: evaluation frameworks, retrieval
+      pipelines, and governed agent workflows, with the measurement discipline
+      of an industrial engineer. Open to full-time roles in Data Science,
+      Machine Learning, and Data Analysis.
     </p>
 
     <div class="hero-actions">
-      <button class="btn btn-primary" onclick="window.location.href='{% url 'download_cv' %}'">Download CV</button>
+      <a class="btn btn-primary" href="{% url 'download_cv' %}">Download CV</a>
       <a class="btn" href="{% url 'project' %}">View projects</a>
       <a class="btn" href="{% url 'contact_me' %}">Contact me</a>
     </div>
 
     <div class="hero-highlights">
       <div class="hl">
-        <div class="hl-k">Evaluation-first</div>
-        <div class="hl-v">I make model behavior measurable and auditable, not a black box.</div>
+        <div class="hl-icon"><i class="bi bi-graph-up-arrow"></i></div>
+        <div class="hl-k">Measured, not guessed</div>
+        <div class="hl-v">Evaluation frameworks and grounded output contracts, so model behavior is provable, not assumed.</div>
       </div>
       <div class="hl">
-        <div class="hl-k">Production-minded</div>
-        <div class="hl-v">Prototypes that grow into reliable, governed systems.</div>
+        <div class="hl-icon"><i class="bi bi-rocket-takeoff"></i></div>
+        <div class="hl-k">Production-ready</div>
+        <div class="hl-v">I take LLM and ML systems from prototype to reliable, governed products.</div>
       </div>
       <div class="hl">
-        <div class="hl-k">Clear communicator</div>
-        <div class="hl-v">I bridge data science and the teams that rely on it.</div>
+        <div class="hl-icon"><i class="bi bi-shield-check"></i></div>
+        <div class="hl-k">Built to be trusted</div>
+        <div class="hl-v">Human-in-the-loop governance and audit trails, communicated clearly to every stakeholder.</div>
       </div>
     </div>
   </div>

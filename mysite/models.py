@@ -55,16 +55,6 @@ class Experience(models.Model):
 
     def __str__(self):
         return self.company_name
-    
-class Skill(models.Model):
-    row_number = models.IntegerField(null=False, blank=False)    
-    column_number = models.IntegerField(null=False, blank=False)
-    title = models.CharField(max_length=50, blank=False, null=False)
-    skill_icon = models.FileField(upload_to='skills', default='')
-    description = models.TextField(max_length=2500,blank=False, null=False)
-
-    def __str__(self) -> str:
-        return self.title
 
 class ProfileAsset(models.Model): 
     resume_file_name = models.CharField(max_length=20, default='resume', blank=True)

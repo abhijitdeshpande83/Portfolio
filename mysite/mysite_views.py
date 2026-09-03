@@ -1,13 +1,13 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, FileResponse, Http404
-from .models import Certification, Tool, Experience, Skill, ProfileAsset, Project
+from .models import Certification, Tool, Experience, ProfileAsset, Project
 from django.urls import reverse_lazy
 from django.core.mail import send_mail
 from django.conf import settings
 from django.views.generic.edit import FormView
 from .forms import ContactForm
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import login
 
 import os
 
@@ -48,12 +48,7 @@ def contact_me(request):
 def skills(request):
     certificates = Certification.objects.all()
     tools = Tool.objects.all()
-    skills = Skill.objects.all().order_by('row_number', 'column_number')
-    total_rows = Skill.objects.values_list('row_number', flat=True).distinct().count()
-    row_numbers = list(range(1, total_rows + 1))  # Create a list of number of rows
-
-
-    params = {'certificates': certificates, 'tools':tools,  'skills': skills, 'row_numbers': row_numbers}
+    params = {'certificates': certificates, 'tools':tools}
     return render(request, 'skills.html', params)
 
 def thankyou(request):

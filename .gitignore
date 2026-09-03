@@ -2,7 +2,7 @@
 /media/NLP_data/**
 
 # Ignore the .env file
-.env.*
+.env
 
 # Ignore venv
 venv*
@@ -31,9 +31,4 @@ migrate.load
 db.json
 db.sqlite3
 
-
-# Celery local beat state file
-celerybeat-schedule
-celerybeat.pid
-ping
 

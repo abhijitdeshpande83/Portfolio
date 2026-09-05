@@ -56,3 +56,12 @@
     .buckets { grid-template-columns: 1fr; }
     .cert-grid { grid-template-columns: 1fr; }
 }
+@media (min-width: 1600px) {
+    .buckets { gap: 24px; }
+    .bucket { padding: 30px 32px; }
+    .bucket-items { gap: 12px; }
+    .tool-chip { font-size: 0.95rem; padding: 11px 16px; }
+    .tool-chip img { width: 36px; height: 36px; }
+    .cert-grid { gap: 20px; }
+    .cert-card { padding: 22px 24px; }
+}

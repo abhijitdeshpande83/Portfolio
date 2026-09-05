@@ -106,3 +106,13 @@ img { max-width: 100%; }
     .nav-cta { border: none; border-radius: 0; padding: 15px var(--pad); }
     .nav-cta:hover { background: var(--accent-soft); color: var(--accent) !important; }
 }
+
+/* large screens: widen the container so big monitors use more of the width */
+@media (min-width: 1600px) {
+    :root { --max: 1360px; --pad: 32px; }
+    .section { padding: 80px 0; }
+}
+@media (min-width: 2000px) {
+    :root { --max: 1500px; }
+    .section { padding: 92px 0; }
+}

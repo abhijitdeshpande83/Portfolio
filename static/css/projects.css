@@ -48,3 +48,9 @@
 
 @media (max-width: 860px) { .projects-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px) { .projects-grid { grid-template-columns: 1fr; } }
+@media (min-width: 1600px) {
+    .projects-grid { gap: 26px; }
+    .project-thumb { height: 172px; }
+    .project-body { padding: 26px 28px 28px; }
+    .project-name { font-size: 1.25rem; }
+}

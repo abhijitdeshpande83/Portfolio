@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
 
 # Copy requirements and install Python dependencies
 COPY requirements.txt .
-COPY libs/ libs/
+COPY libs/rag_pipeline-3.3-py3-none-any.whl libs/
 
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
@@ -25,8 +25,8 @@ COPY . .
 RUN python manage.py collectstatic --noinput
 
 # Copy and set startup script
-COPY start.sh /start.sh
-COPY intelliqa-cleanup.sh /intelliqa-cleanup.sh
+COPY automation/start.sh /start.sh
+COPY automation/intelliqa-cleanup.sh /intelliqa-cleanup.sh
 COPY crontab.txt /etc/cron.d/my-cron-job
 
 # Make scripts executable

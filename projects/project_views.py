@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.template.loader import get_template
 from rag_pipeline import load_data, vectorstore, ask_question, is_supported_file
 from django.views.decorators.csrf import csrf_exempt
-from .forms import UploadFileForm
+from django.template.loader import render_to_string
 from .models import QueryData
 import hashlib
 import os
@@ -30,8 +30,10 @@ def process_file(request):
 
     session_id = creat_session_id(request)
 
-    if request.method=='POST':
-        file = request.FILES.get('file')                      #Upload file 
+    if request.method!='POST':
+        return JsonResponse({"status": "error", "message": "Invalid request method. Please use POST."})
+
+    file = request.FILES.get('file')                      #Upload file 
     
     if not is_supported_file(file.name):
         return JsonResponse({"status": "error", "message": "Unsupported file type. Please upload a supported file."})
@@ -186,7 +188,6 @@ def lambda_proxy(request):
 @csrf_exempt
 def booking_confirmation(request):
     if request.method=="POST":
-        html_template = get_template("booking_confirmation.html")
-        html_content = html_template.template.source
+        html_content = render_to_string("booking_confirmation.html")                                       
         return HttpResponse(html_content, content_type="text/html; charset=utf-8")
     return HttpResponse("Invalid method", status=405)

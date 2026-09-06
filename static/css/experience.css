@@ -1,5 +1,6 @@
-/* experience: vertical timeline with icon markers */
+/* experience + education: shared vertical timeline with icon markers */
 .exp-head { margin-bottom: 32px; }
+.edu-head { margin-top: 52px; }
 
 .exp-timeline { display: flex; flex-direction: column; }
 
@@ -59,36 +60,13 @@
 .exp-desc li::marker { color: var(--accent); }
 .exp-desc p { margin: 0 0 8px; }
 
-/* education: vertical cards with icons */
-.edu-head { margin-top: 52px; }
-.edu-list { display: flex; flex-direction: column; gap: 16px; }
-.edu-card {
-    display: flex;
-    align-items: flex-start;
-    gap: 18px;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--r);
-    padding: 20px 22px;
-}
-.edu-icon {
-    flex: none;
-    width: 46px;
-    height: 46px;
-    border-radius: 12px;
-    background: var(--accent-soft);
-    color: var(--accent);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.3rem;
-}
-.edu-icon img { width: 30px; height: 30px; object-fit: contain; }
-.edu-body h3 { font-family: var(--display); font-size: 1.1rem; font-weight: 600; color: #fff; margin: 0 0 6px; }
-.edu-school { color: var(--accent); font-size: 0.95rem; margin: 0 0 8px; }
-.edu-meta { color: var(--muted); font-size: 0.92rem; }
+/* education detail line */
+.edu-meta { color: var(--muted); font-size: 0.92rem; margin-top: 6px; }
 
 @media (max-width: 560px) {
     .exp-item { gap: 14px; }
     .exp-card { padding: 18px; }
 }
+
+/* keep the reading column from stretching too wide on large monitors */
+@media (min-width: 1600px) { .exp-timeline { max-width: 1040px; } }

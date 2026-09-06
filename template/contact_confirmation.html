@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<body style="margin:0;padding:0;background-color:#eef1f5;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+
+  <!-- hidden preview text shown in the inbox list -->
+  <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:#eef1f5;">
+    I've received your message and will get back to you soon.
+  </div>
+
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="padding:30px 16px;">
+    <tr><td align="center">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:470px;background:#ffffff;border-radius:18px;overflow:hidden;box-shadow:0 10px 26px -10px rgba(15,23,42,0.28);">
+
+        <!-- accent bar -->
+        <tr><td style="height:3px;background:#ff6600;font-size:0;line-height:0;">&nbsp;</td></tr>
+
+        <!-- header -->
+        <tr><td style="background-color:#1b1b1f;padding:26px 32px 22px;text-align:center;">
+          <div style="color:#8a8f99;font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:14px;">The Analytic Mind</div>
+          <div style="background:#ff6600;width:48px;height:48px;line-height:48px;border-radius:14px;margin:0 auto 14px;font-size:24px;color:#141414;font-weight:700;">&#10003;</div>
+          <h1 style="margin:0;color:#ffffff;font-size:20px;font-weight:800;letter-spacing:-0.3px;">Message received</h1>
+          <p style="margin:8px 0 0;color:#b7bdc7;font-size:13px;">Thanks, {{ first_name }}. I'll get back to you soon.</p>
+        </td></tr>
+
+        <!-- intro -->
+        <tr><td style="padding:26px 32px 4px;">
+          <p style="margin:0 0 18px;color:#475569;font-size:14px;line-height:1.7;">
+            Thanks for reaching out. I've received your message and appreciate you sharing it. Here's a copy for your records:
+          </p>
+
+          <!-- details -->
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f8fafc;border:1px solid #e5e9f0;border-radius:12px;">
+            <tr><td style="padding:14px 18px 10px;">
+              <div style="color:#94a3b8;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:1px;">Name</div>
+              <div style="color:#1e293b;font-weight:600;font-size:14px;margin-top:3px;">{{ full_name }}</div>
+            </td></tr>
+            <tr><td style="padding:10px 18px;border-top:1px solid #e9edf3;">
+              <div style="color:#94a3b8;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:1px;">Email</div>
+              <div style="color:#1e293b;font-weight:600;font-size:14px;margin-top:3px;">{{ user_email }}</div>
+            </td></tr>
+            <tr><td style="padding:10px 18px;border-top:1px solid #e9edf3;">
+              <div style="color:#94a3b8;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:1px;">Contact number</div>
+              <div style="color:#1e293b;font-weight:600;font-size:14px;margin-top:3px;">{{ user_contact|default:"Not provided" }}</div>
+            </td></tr>
+            <tr><td style="padding:10px 18px 14px;border-top:1px solid #e9edf3;">
+              <div style="color:#94a3b8;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:1px;">Message</div>
+              <div style="color:#334155;font-size:14px;line-height:1.6;margin-top:5px;">{{ user_message|default:"No additional message was included."|linebreaksbr }}</div>
+            </td></tr>
+          </table>
+
+          <!-- what happens next -->
+          <p style="margin:18px 0 0;color:#64748b;font-size:13px;line-height:1.65;">
+            I usually reply within one to two business days. For anything time-sensitive, reach me at the links below.
+          </p>
+
+          <!-- CTA -->
+          <div style="text-align:center;padding:22px 0 6px;">
+            <a href="https://theanalyticmind.com" style="display:inline-block;background:#ff6600;color:#141414;text-decoration:none;padding:11px 24px;border-radius:9px;font-weight:700;font-size:13px;">Visit my portfolio &#8594;</a>
+          </div>
+        </td></tr>
+
+        <!-- footer -->
+        <tr><td style="padding:20px 32px 28px;text-align:center;border-top:1px solid #eef2f7;">
+
+          <!-- social links: plain text, renders everywhere, nothing to host -->
+          <p style="margin:0 0 12px;font-size:12.5px;">
+            <a href="https://www.linkedin.com/in/abhijit-deshpande/" style="color:#ff6600;text-decoration:none;font-weight:600;">LinkedIn</a>
+            <span style="color:#cbd5e1;">&nbsp;&middot;&nbsp;</span>
+            <a href="https://github.com/abhijitdeshpande83" style="color:#ff6600;text-decoration:none;font-weight:600;">GitHub</a>
+            <span style="color:#cbd5e1;">&nbsp;&middot;&nbsp;</span>
+            <a href="mailto:abhijitdeshpande83@gmail.com" style="color:#ff6600;text-decoration:none;font-weight:600;">Email</a>
+          </p>
+
+          <p style="margin:0 0 3px;color:#1e293b;font-size:13.5px;font-weight:700;">Abhijit Deshpande</p>
+          <p style="margin:0 0 8px;color:#94a3b8;font-size:11.5px;">Applied AI &amp; ML Systems</p>
+          <p style="margin:0;color:#b6c0cf;font-size:11px;">&copy; 2026 Abhijit Deshpande &middot; St. Louis, MO</p>
+        </td></tr>
+
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>

@@ -1,3 +1,4 @@
+import os
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, FileResponse, Http404
 from .models import Certification, Tool, Experience, ProfileAsset, Project
@@ -8,8 +9,7 @@ from django.views.generic.edit import FormView
 from .forms import ContactForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login
-
-import os
+from django.template.loader import render_to_string
 
 # Create your views here.
 
@@ -71,42 +71,30 @@ class ContactFormView(FormView):
             user_first_name = form.cleaned_data['first_name']
             user_last_name = form.cleaned_data['last_name']
             full_name = f"{user_first_name} {user_last_name}"
-            
+
+            html_content = render_to_string('contact_confirmation.html', {
+                'first_name': user_first_name,
+                'user_email': user_email,
+                'full_name': full_name,
+                'user_contact': form.cleaned_data['contact_number'],
+                'user_message': form.cleaned_data['message']
+                }
+            )
+
             # Prepare email content
-            subject = "Submission Successful 🙂"
-            message = f"""
-            <p>Dear {full_name},</p>
-
-            <p>I appreciate you taking the time to share your thoughts with me, and I’m happy to confirm that 
-            I have received your feedback.</p>
-
-            <h3>Submission Details:</h3>
-            <ul>
-                <li><strong>Name:</strong> {full_name}</li>
-                <li><strong>Email:</strong> {user_email}</li>
-                <li><strong>Contact Number:</strong> {form.cleaned_data['contact_number']}</li>
-                <li><strong>Message:</strong> {form.cleaned_data['message']}</li>
-            </ul>
-
-            <p>Your feedback is incredibly important to me, and I genuinely value your insights regarding my work. I am eager 
-            to hear your thoughts and suggestions, as they will help me improve and grow.</p>
-
-            <p>If you have any further comments or questions, please don't hesitate to reach out. 
-            I truly appreciate your time and support in this process.</p>
-
-            <p><em>Best regards,</em><br>
-            <em>Abhijit Deshpande</em><br>
-            <a href="https://www.linkedin.com/in/abhijit-deshpande/">LinkedIn</a><br>
-            <em>+1 817-271-2819</em></p>
-            """
-
+            plain_message = (
+            f"Hi {user_first_name}, thanks for reaching out. "
+            "I've received your message and will get back to you soon.\n\n- Abhijit Deshpande"
+            )
+            subject = f"Thanks for reaching out, {user_first_name}!"
+            
             send_mail(
                 subject,
-                message,
+                plain_message,
                 settings.EMAIL_HOST_USER,  # Your email
                 [user_email],  # Recipient email
                 fail_silently=False,
-                html_message=message  # This parameter allows HTML content
+                html_message=html_content  # This parameter allows HTML content
             )
 
             self.request.session['form_submitted'] = True

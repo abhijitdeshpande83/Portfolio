@@ -33,11 +33,21 @@ dist/
 # Docker files themselves
 dockerfile
 .dockerignore
-docker-clean.sh
-docker-build.sh
 README.md
 docker-compose.yml
 
 # media files and static files
 media/
+static/
 staticfiles/
+
+# Ignore automation scripts
+automation/*
+!automation/start.sh
+!automation/intelliqa-cleanup.sh
+
+# Ignore libs except RAG pipeline wheel
+libs/*
+!libs/rag_pipeline-3.3-py3-none-any.whl
+
+

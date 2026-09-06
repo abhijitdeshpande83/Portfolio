@@ -31,4 +31,5 @@ migrate.load
 db.json
 db.sqlite3
 
-
+#Ignore key 
+portfolio-ec2.pem

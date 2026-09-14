@@ -1,0 +1,14 @@
+name: Deploy Django Application
+on: 
+    workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: build Docker image
+        run: ./automation/docker-build.sh
+      - name: Print
+        run: echo "Built Docker image successfully"

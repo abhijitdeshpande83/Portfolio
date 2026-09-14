@@ -1,6 +1,8 @@
 name: Deploy Django Application
 on: 
-    workflow_dispatch:
+  push:
+    branches:
+      - github/actions
 
 jobs:
   deploy:

@@ -2,7 +2,7 @@ name: Deploy Django Application
 on:
   push:
     branches:
-      - github/actions
+      - main
   workflow_dispatch:
 
 jobs:
@@ -17,3 +17,31 @@ jobs:
           DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
       - name: Print
         run: echo "Built Docker image successfully"
+
+  ec2-cleanup:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Login into EC2
+        uses: appleboy/ssh-action@v1.2.2
+        with: 
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+            echo "Logged into EC2 successfully"
+            docker ps -a
+            ./docker-clean.sh
+  deploy:
+    runs-on: ubuntu-latest
+    needs: ec2-cleanup
+    steps:
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v1.2.2
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+            echo "Deploying to EC2..."
+            docker compose --env-file .env up -d

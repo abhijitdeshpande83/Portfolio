@@ -27,7 +27,7 @@ if [ -z "$DOCKER_USER" ] || [ -z "$IMG_TAG" ]; then
 fi
 
 echo -e "${YELLOW}[1/3] Logging into Docker...${NC}"
-docker login
+echo "$DOCKER_TOKEN" | docker login -u "$DOCKER_USER" --password-stdin
 
 echo
 echo -e "${YELLOW}[2/3] Building and pushing image...${NC}"

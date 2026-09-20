@@ -1,11 +1,12 @@
 name: Deploy Django Application
-on: 
+on:
   push:
     branches:
       - github/actions
+  workflow_dispatch:
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -14,6 +15,5 @@ jobs:
         run: ./automation/docker-build.sh "${{ secrets.DOCKER_USER }}" "${{ secrets.IMG_TAG }}"
         env:
           DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
-
       - name: Print
         run: echo "Built Docker image successfully"

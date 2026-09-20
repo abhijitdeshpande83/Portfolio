@@ -12,5 +12,8 @@ jobs:
         uses: actions/checkout@v3
       - name: build Docker image
         run: ./automation/docker-build.sh "${{ secrets.DOCKER_USER }}" "${{ secrets.IMG_TAG }}"
+        env:
+          DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+
       - name: Print
         run: echo "Built Docker image successfully"

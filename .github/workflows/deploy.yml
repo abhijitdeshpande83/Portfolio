@@ -21,13 +21,16 @@ jobs:
   sync-asstes:
     runs-on: ubuntu-latest
     steps:
-      - name: Sync Assets from local to EC2
+      - name: Checkout code
         uses: actions/checkout@v3
-      - name: sync-assets
+      - name: Sync assets to EC2
         run: ./automation/sync-assets.sh
         env:
-          EC2_HOST: ${{ secrets.EC2_HOST }}
-          key: ${{ secrets.EC2_KEY }}
+          # EC2_HOST: ${{ secrets.EC2_HOST }}
+          KEY: ${{ secrets.EC2_KEY }}
+      - name: Confirm asset sync
+        run: echo "Static files, media, environment, and deployment configuration successfully synced to EC2."
+
       
   ec2-cleanup:
     runs-on: ubuntu-latest

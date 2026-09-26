@@ -12,7 +12,7 @@ NC="\033[0m"
 PROJECT_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-EC2_HOST="${EC2_HOST:-ubuntu@52.54.48.37}"
+EC2_HOST="${EC2_HOST:-ubuntu@ec2-52-54-48-37.compute-1.amazonaws.com}"
 KEY="${KEY:-$SCRIPT_DIR/portfolio-ec2.pem}"
 
 # rsync flags:
@@ -24,7 +24,7 @@ echo -e "${BLUE}EC2 Asset Sync${NC}"
 echo
 
 echo -e "${YELLOW}[1/6] Checking EC2 connection...${NC}"
-if ! ssh -i "$KEY" -o ConnectTimeout=5 -o BatchMode=yes "$EC2_HOST" exit 2>/dev/null; then
+if ! ssh -i "$KEY" -o ConnectTimeout=5 -o BatchMode=yes "$EC2_HOST" exit; then
     echo -e "${RED}ERROR: EC2 is not reachable. Please turn it on and try again.${NC}"
     exit 1
 fi

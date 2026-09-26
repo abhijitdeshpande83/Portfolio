@@ -23,14 +23,19 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      - name: Set up SSH key
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H "${{ secrets.EC2_HOST }}" >> ~/.ssh/known_hosts
+          echo "${{ secrets.EC2_KEY }}" > /tmp/portfolio-ec2.pem
+          chmod 600 /tmp/portfolio-ec2.pem
+          echo "SSH key configured successfully."
       - name: Sync assets to EC2
         run: ./automation/sync-assets.sh
         env:
-          # EC2_HOST: ${{ secrets.EC2_HOST }}
-          KEY: ${{ secrets.EC2_KEY }}
+          KEY: /tmp/portfolio-ec2.pem
       - name: Confirm asset sync
         run: echo "Static files, media, environment, and deployment configuration successfully synced to EC2."
-
       
   ec2-cleanup:
     runs-on: ubuntu-latest

@@ -12,8 +12,8 @@ NC="\033[0m"
 PROJECT_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-EC2_HOST="ubuntu@52.54.48.37"
-KEY="$SCRIPT_DIR/portfolio-ec2.pem"
+EC2_HOST="${EC2_HOST:-ubuntu@52.54.48.37}"
+KEY="${KEY:-$SCRIPT_DIR/portfolio-ec2.pem}"
 
 # rsync flags:
 # -r recurse, -t preserve modification times, -v verbose, -z compress

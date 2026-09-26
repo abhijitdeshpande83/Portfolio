@@ -17,12 +17,18 @@ jobs:
           DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
       - name: Print 
         run: echo "Built Docker image successfully"
+  
+  sync-asstes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync Assets from local to EC2
+        uses: actions/checkout@v3
       - name: sync-assets
         run: ./automation/sync-assets.sh
         env:
           EC2_HOST: ${{ secrets.EC2_HOST }}
           key: ${{ secrets.EC2_KEY }}
-
+      
   ec2-cleanup:
     runs-on: ubuntu-latest
     needs: build

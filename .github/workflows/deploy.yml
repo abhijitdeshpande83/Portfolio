@@ -11,14 +11,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: build Docker image 
-        run: ./automation/docker-build.sh "${{ secrets.DOCKER_USER }}" "${{ secrets.IMG_TAG }}"
+      - name: Build Docker image 
+        run: ./automation/docker-build.sh "${{ vars.DOCKER_USER }}" "${{ vars.IMG_TAG }}"
         env:
           DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
       - name: Print 
-        run: echo "Built Docker image successfully"
+        run: echo "Docker image built successfully."
   
-  sync-asstes:
+  sync-assets:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -26,10 +26,12 @@ jobs:
       - name: Set up SSH key
         run: |
           mkdir -p ~/.ssh
-          ssh-keyscan -H "${{ secrets.EC2_HOST }}" >> ~/.ssh/known_hosts
+          ssh-keyscan -H "${{ vars.EC2_HOST }}" >> ~/.ssh/known_hosts
           echo "${{ secrets.EC2_KEY }}" > /tmp/portfolio-ec2.pem
+          echo "${{ secrets.ENV_FILE }}" > .env
+          chmod 600 .env
           chmod 600 /tmp/portfolio-ec2.pem
-          echo "SSH key configured successfully."
+          echo "SSH and environment configuration completed successfully."
       - name: Sync assets to EC2
         run: ./automation/sync-assets.sh
         env:
@@ -44,8 +46,8 @@ jobs:
       - name: Login into EC2
         uses: appleboy/ssh-action@v1.2.2
         with: 
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
+          host: ${{ vars.EC2_HOST }}
+          username: ${{ vars.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           script: |
             echo "Logged into EC2 successfully"
@@ -59,8 +61,8 @@ jobs:
       - name: Deploy to EC2
         uses: appleboy/ssh-action@v1.2.2
         with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
+          host: ${{ vars.EC2_HOST }}
+          username: ${{ vars.EC2_USER }}    
           key: ${{ secrets.EC2_KEY }}
           script: |
             echo "Deploying to EC2..."

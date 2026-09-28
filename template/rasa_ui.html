@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cinemora</title>
     {% load static %}
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Syne:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="icon" href="{% static 'favicon_io/rasa_favicon.png' %}">
     <link rel="stylesheet" href="{% static 'css/rasa_ui.css' %}">
 </head>
+
 <body>
 
 <div class="bg-icons-overlay">
@@ -23,7 +25,7 @@
     <i class="fas fa-star"></i>
     <i class="fas fa-film"></i>
     <i class="fas fa-ticket-alt"></i>
-    </div>
+</div>
 
 <div class="app-wrapper">
     <aside class="sidebar">
@@ -31,10 +33,12 @@
             <div class="brand-logo-small">C</div>
             <div class="brand-text">Cinemora</div>
         </div>
+
         <div class="session-info">
             <span class="label">Active Session</span>
             <span id="session-id" class="value">{{ session }}</span>
         </div>
+
         <div class="status-card">
             <div class="status-dot"></div>
             <span>AI Concierge Online</span>
@@ -45,6 +49,7 @@
         <header class="chat-header">
             <div class="header-content">
                 <img src="{% static 'project_data/Cinemora.png' %}" alt="Cinemora" class="header-logo">
+
                 <div class="header-text">
                     <h1>Movie Booking</h1>
                     <p>Discover films, check showtimes, and book your seats</p>
@@ -54,22 +59,28 @@
 
         <div id="chat" class="message-container">
             <div class="bot-row">
-                <div class="bubble bot">Welcome back! I'm Cinemora. how can I assist you today?</div>
+                <div class="bubble bot">
+                    Welcome back! I'm Cinemora. how can I assist you today?
+                </div>
             </div>
         </div>
 
         <form class="input-area" onsubmit="sendMessage(); return false;">
             <div class="input-group">
                 <input id="msg" type="text" placeholder="Search movies, genres, or showtimes..." autocomplete="off">
+
                 <button type="submit" class="send-button">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
                 </button>
             </div>
         </form>
     </main>
 </div>
 
-<script src="{% static 'rasa_ui.js' %}"></script>
+<script src="{% static 'js/rasa_ui.js' %}"></script>
 
 </body>
 </html>

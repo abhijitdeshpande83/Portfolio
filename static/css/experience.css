@@ -1,4 +1,4 @@
-/* experience + education: shared vertical timeline with icon markers */
+/* experience & education */
 .exp-head { margin-bottom: 32px; }
 .edu-head { margin-top: 52px; }
 
@@ -33,6 +33,7 @@
     font-size: 1.3rem;
 }
 .exp-marker img { width: 30px; height: 30px; object-fit: contain; }
+.exp-marker svg { display: block; }
 
 .exp-content { flex: 1; padding-bottom: 24px; }
 .exp-item:last-child .exp-content { padding-bottom: 0; }
@@ -48,12 +49,13 @@
 .exp-company { font-family: var(--display); font-size: 1.15rem; font-weight: 600; color: #fff; margin: 0; }
 .exp-time { font-family: var(--mono); font-size: 0.82rem; color: var(--faint); white-space: nowrap; }
 
-.exp-role { font-size: 0.98rem; color: var(--accent); margin: 0 0 6px; }
+.exp-role { font-family: var(--body); font-size: 0.98rem; color: var(--accent); margin: 0 0 6px; }
 .exp-loc { color: var(--muted); font-style: italic; }
 
-.exp-project { font-size: 0.92rem; color: var(--text); margin: 0 0 10px; }
+.exp-project { font-family: var(--body); font-size: 0.92rem; color: var(--text); margin: 0 0 10px; }
 
-/* description holds stored HTML (lists, bold, etc.) */
+/* description holds  HTML */
+.exp-desc, .exp-desc * { font-family: var(--body); }
 .exp-desc { font-size: 0.95rem; color: var(--muted); line-height: 1.7; }
 .exp-desc ul { margin: 6px 0 0; padding-left: 20px; }
 .exp-desc li { margin: 0 0 6px; }
@@ -61,12 +63,16 @@
 .exp-desc p { margin: 0 0 8px; }
 
 /* education detail line */
-.edu-meta { color: var(--muted); font-size: 0.92rem; margin-top: 6px; }
+.edu-meta { font-family: var(--body); color: var(--muted); font-size: 0.95rem; line-height: 1.7; margin-top: 6px; }
 
 @media (max-width: 560px) {
     .exp-item { gap: 14px; }
     .exp-card { padding: 18px; }
 }
 
-/* keep the reading column from stretching too wide on large monitors */
-@media (min-width: 1600px) { .exp-timeline { max-width: 1040px; } }
+@media (min-width: 1500px) {
+    .exp-timeline { max-width: 1100px; margin-left: auto; margin-right: auto; }
+}
+@media (min-width: 1900px) {
+    .exp-timeline { max-width: 1240px; }
+}

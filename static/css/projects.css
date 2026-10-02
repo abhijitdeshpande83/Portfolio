@@ -46,11 +46,16 @@
 .project-link { font-family: var(--mono); font-size: 0.85rem; color: var(--accent); display: inline-flex; align-items: center; gap: 6px; transition: color .16s ease; }
 .project-link:hover { color: var(--accent-hover); }
 
+/* smaller screens */
 @media (max-width: 860px) { .projects-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px) { .projects-grid { grid-template-columns: 1fr; } }
+
 @media (min-width: 1600px) {
-    .projects-grid { gap: 26px; }
+    .projects-grid { gap: 24px; }
     .project-thumb { height: 172px; }
-    .project-body { padding: 26px 28px 28px; }
+    .project-body { padding: 24px 26px 26px; }
     .project-name { font-size: 1.25rem; }
+}
+@media (min-width: 1900px) {
+    .projects-grid { grid-template-columns: repeat(4, 1fr); }
 }
